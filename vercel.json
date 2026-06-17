@@ -1,5 +1,12 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": []
+  "env": {
+    "NOTION_PAGE_ID": "02ab3b8678004aa69e9e415905ef32a5",
+    "API_BASE_URL": "https://www.notion.so/api/v3"
+  },
+  "build": {
+    "env": {
+      "NOTION_PAGE_ID": "02ab3b8678004aa69e9e415905ef32a5",
+      "API_BASE_URL": "https://www.notion.so/api/v3"
+    }
+  }
 }
