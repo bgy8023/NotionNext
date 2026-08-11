@@ -2,7 +2,7 @@ import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
 import CopyRightDate from '@/components/CopyRightDate'
 import BeiAnSite from '@/components/BeiAnSite'
-import BeiAnGongAn from '@/components/BeiAnGongAn'
+import { BeiAnGongAn } from '@/components/BeiAnGongAn'
 import CONFIG from '../config'
 
 /**
