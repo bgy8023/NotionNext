@@ -13,7 +13,7 @@ const Hero = () => {
   )
   return (
     <section className='yscworks-hero'>
-      <div className='yscworks-container'>
+      <div className='ysc-container'>
         <p className='yscworks-kicker'>{kicker}</p>
         <h1>{title}</h1>
         <p>{desc}</p>

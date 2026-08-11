@@ -25,6 +25,7 @@ import CONFIG from './config'
 import { Style } from './style'
 import { Hero } from './components/Hero'
 import { Coop } from './components/Coop'
+import { QuickAccess } from './components/QuickAccess'
 
 /**
  * 基础布局框架
@@ -65,7 +66,7 @@ const LayoutBase = props => {
           `}>
           {/* 内容 */}
           <div
-            className={`${fullWidth ? '' : LAYOUT_VERTICAL ? 'max-w-5xl' : 'max-w-5xl'} w-full xl:px-14 lg:px-4`}>
+            className={`${fullWidth ? '' : LAYOUT_VERTICAL ? 'max-w-[1200px]' : 'max-w-[1200px]'} w-full xl:px-14 lg:px-4`}>
             <Transition
               show={!onLoading}
               appear={true}
@@ -108,6 +109,9 @@ const LayoutBase = props => {
           <i className='fas fa-angle-up text-2xl' />
         </div>
       </div>
+
+      {/* ⌘ Call me 快捷入口 */}
+      <QuickAccess />
     </div>
   )
 }
