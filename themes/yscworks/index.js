@@ -26,6 +26,14 @@ import { Style } from './style'
 import { Hero } from './components/Hero'
 import { Coop } from './components/Coop'
 import { QuickAccess } from './components/QuickAccess'
+import { SignalStrip } from './components/SignalStrip'
+import { HelpGrid } from './components/HelpGrid'
+import { Stats } from './components/Stats'
+import { RouteGrid } from './components/RouteGrid'
+import { WhatIDo } from './components/WhatIDo'
+import { Projects } from './components/Projects'
+import { Updates } from './components/Updates'
+import { Community } from './components/Community'
 
 /**
  * 基础布局框架
@@ -117,15 +125,57 @@ const LayoutBase = props => {
 }
 
 /**
- * 首页
+ * 首页 —— 对齐 yscai101.com 首页 12 区块结构
+ * SignalStrip → Hero → HelpGrid → Stats → RouteGrid → WhatIDo
+ * → Projects(产品矩阵, Notion子页面驱动) → Updates → Community → 写作 → Coop
  * @param {*} props
- * @returns 此主题首页就是列表
+ * @returns
  */
 const LayoutIndex = props => {
+  const { posts } = props
+  // 文章列表（写作区块）：取最新 4 篇
+  const recentPosts = (posts || []).slice(0, 4)
+
   return (
     <>
+      <SignalStrip />
       <Hero />
-      <LayoutPostList {...props} />
+      <HelpGrid />
+      <Stats />
+      <RouteGrid />
+      <WhatIDo />
+      <Projects posts={posts || []} />
+      <Updates />
+      <Community />
+
+      {/* 写作区块：PUBLIC NOTES 文章列表 */}
+      <section className='yscworks-lab-writing section'>
+        <div className='yscworks-container yscworks-lab-writing-grid'>
+          <div className='yscworks-lab-section-head'>
+            <p className='yscworks-section-label'>
+              {siteConfig('YSCWORKS_WRITING_LABEL', 'PUBLIC NOTES')}
+            </p>
+            <h2>{siteConfig('YSCWORKS_WRITING_TITLE', '把真实过程写下来。')}</h2>
+            <p>{siteConfig('YSCWORKS_WRITING_DESC', '网站只收录已经存在的文章。')}</p>
+            <div className='yscworks-home-actions'>
+              <SmartLink href='/category' className='yscworks-btn yscworks-btn-secondary'>进入写作</SmartLink>
+            </div>
+          </div>
+          <div className='yscworks-lab-note-list'>
+            {recentPosts.map((p, i) => (
+              <SmartLink key={p.id || i} href={`/article/${p.slug}`}>
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                <strong>{p.title}</strong>
+                <em>{(p.category || '文章')}</em>
+              </SmartLink>
+            ))}
+            {recentPosts.length === 0 && (
+              <p style={{ color: 'var(--text-secondary)' }}>暂无文章，请在 Notion 中添加。</p>
+            )}
+          </div>
+        </div>
+      </section>
+
       <Coop />
     </>
   )

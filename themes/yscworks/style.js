@@ -89,6 +89,15 @@ const Style = () => {
       background: transparent;
       backdrop-filter: saturate(120%);
     }
+    /* 全局容器（所有区块共用） */
+    #theme-yscworks .yscworks-container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 720px) {
+      #theme-yscworks .yscworks-container { padding: 0 18px; }
+    }
     #theme-yscworks .yscworks-nav .yscworks-container {
       max-width: var(--container);
       margin: 0 auto;
@@ -686,6 +695,763 @@ const Style = () => {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
       }
+    }
+
+    /* ================================================================
+       Mars1024 首页完整区块（复刻 yscai101.com 首页）
+       ================================================================ */
+
+    /* 通用区块头 */
+    #theme-yscworks .yscworks-section-label {
+      font-size: var(--fs-num);
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 0 0 14px;
+    }
+    #theme-yscworks .yscworks-lab-section-head {
+      margin-bottom: 44px;
+      max-width: 640px;
+    }
+    #theme-yscworks .yscworks-lab-section-head h2 {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin: 0 0 14px;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-lab-section-head p:last-child {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0;
+    }
+    #theme-yscworks .yscworks-home-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    #theme-yscworks .yscworks-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    #theme-yscworks .yscworks-btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--border-btn-main);
+    }
+    #theme-yscworks .yscworks-btn-primary:hover { background: #a3412b; }
+    #theme-yscworks .yscworks-btn-secondary {
+      background: var(--panel-strong);
+      color: var(--text-primary);
+      border-color: var(--border-btn-sub);
+    }
+    #theme-yscworks .yscworks-btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    #theme-yscworks .yscworks-btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border-color: transparent;
+    }
+    #theme-yscworks .yscworks-btn-ghost:hover { color: var(--accent); }
+
+    /* ===== 1. 动态信号条 ===== */
+    #theme-yscworks .yscworks-signal-strip {
+      overflow: hidden;
+      background: var(--text-primary);
+      color: var(--bg);
+      padding: 10px 0;
+      white-space: nowrap;
+      position: relative;
+    }
+    #theme-yscworks .yscworks-signal-track {
+      display: inline-flex;
+      gap: 48px;
+      padding-left: 100%;
+      animation: yscworks-marquee 30s linear infinite;
+    }
+    #theme-yscworks .yscworks-signal-track span {
+      font-size: 13px;
+      opacity: 0.92;
+    }
+    #theme-yscworks .yscworks-signal-track b {
+      color: var(--accent);
+      margin-right: 8px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+    @keyframes yscworks-marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== 2. Hero（lab-hero + console） ===== */
+    #theme-yscworks .yscworks-lab-hero {
+      padding: 88px 0 72px;
+      position: relative;
+    }
+    #theme-yscworks .yscworks-lab-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 56px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      #theme-yscworks .yscworks-lab-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    #theme-yscworks .yscworks-lab-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: var(--fs-num);
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 24px;
+    }
+    #theme-yscworks .yscworks-live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: yscworks-pulse 2s infinite;
+    }
+    @keyframes yscworks-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    #theme-yscworks .yscworks-lab-hero-copy h1 {
+      font-size: clamp(2.4rem, 5.5vw, var(--fs-hero));
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin: 0 0 22px;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-lab-lead {
+      max-width: 560px;
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin: 0 0 26px;
+    }
+    #theme-yscworks .yscworks-lab-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    #theme-yscworks .yscworks-lab-tags span {
+      font-size: 13px;
+      color: var(--text-primary);
+      background: var(--tag-bg);
+      border: 1px solid var(--border-card);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+
+    /* console 卡 */
+    #theme-yscworks .yscworks-lab-console {
+      background: var(--panel-cream);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(31, 25, 21, 0.08);
+    }
+    #theme-yscworks .yscworks-console-topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(31, 25, 21, 0.04);
+      border-bottom: 1px solid var(--border-card);
+    }
+    #theme-yscworks .yscworks-console-topbar span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--border-card-hover);
+    }
+    #theme-yscworks .yscworks-console-topbar span:first-child { background: #e8a0a0; }
+    #theme-yscworks .yscworks-console-topbar span:nth-child(2) { background: #e8cfa0; }
+    #theme-yscworks .yscworks-console-topbar span:nth-child(3) { background: #a0cfa8; }
+    #theme-yscworks .yscworks-console-topbar strong {
+      margin-left: auto;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    }
+    #theme-yscworks .yscworks-console-profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px 10px;
+    }
+    #theme-yscworks .yscworks-console-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    #theme-yscworks .yscworks-console-profile p {
+      margin: 0 0 3px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-console-profile strong {
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    #theme-yscworks .yscworks-console-lines {
+      padding: 6px 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    #theme-yscworks .yscworks-console-lines p {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    }
+    #theme-yscworks .yscworks-console-lines p span {
+      display: inline-block;
+      min-width: 64px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    #theme-yscworks .yscworks-console-build {
+      margin: 0 20px 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      background: var(--panel);
+    }
+    #theme-yscworks .yscworks-console-build > div:first-child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    #theme-yscworks .yscworks-console-build span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+    #theme-yscworks .yscworks-console-build strong {
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-console-progress {
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(31, 25, 21, 0.08);
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    #theme-yscworks .yscworks-console-progress i {
+      display: block;
+      height: 100%;
+      width: 68%;
+      background: var(--green);
+      border-radius: 3px;
+      animation: yscworks-progress 3s ease-in-out infinite;
+    }
+    @keyframes yscworks-progress {
+      0% { width: 30%; }
+      50% { width: 82%; }
+      100% { width: 30%; }
+    }
+    #theme-yscworks .yscworks-console-build small {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+    }
+    #theme-yscworks .yscworks-console-manifesto {
+      padding: 18px 20px 22px;
+      border-top: 1px solid var(--border-card);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    #theme-yscworks .yscworks-console-manifesto span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+    #theme-yscworks .yscworks-console-manifesto strong {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text-primary);
+      white-space: pre-line;
+    }
+    #theme-yscworks .yscworks-console-manifesto small {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: ui-monospace, Consolas, monospace;
+    }
+
+    /* ===== 3. HOW I CAN HELP ===== */
+    #theme-yscworks .yscworks-help-section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border-card);
+    }
+    #theme-yscworks .yscworks-help-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+      gap: 48px;
+      margin-bottom: 44px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { #theme-yscworks .yscworks-help-head { grid-template-columns: 1fr; gap: 20px; } }
+    #theme-yscworks .yscworks-help-head h2 {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0;
+      color: var(--text-primary);
+      white-space: pre-line;
+    }
+    #theme-yscworks .yscworks-help-head > p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0;
+      padding-top: 6px;
+    }
+    #theme-yscworks .yscworks-help-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 960px) { #theme-yscworks .yscworks-help-grid { grid-template-columns: 1fr; } }
+    #theme-yscworks .yscworks-help-card {
+      background: var(--panel);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 32px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.18s ease, transform 0.18s ease;
+    }
+    #theme-yscworks .yscworks-help-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-3px);
+    }
+    #theme-yscworks .yscworks-help-index {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+    #theme-yscworks .yscworks-help-card h3 {
+      font-size: 21px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-help-situation {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    #theme-yscworks .yscworks-help-situation b { color: var(--text-primary); font-weight: 600; }
+    #theme-yscworks .yscworks-help-delivery {
+      border-top: 1px dashed var(--border-card);
+      padding-top: 12px;
+    }
+    #theme-yscworks .yscworks-help-delivery span,
+    #theme-yscworks .yscworks-help-proof span {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    #theme-yscworks .yscworks-help-delivery p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    #theme-yscworks .yscworks-help-proof strong {
+      font-size: 14px;
+      color: var(--green);
+      font-weight: 600;
+    }
+    #theme-yscworks .yscworks-help-card > a {
+      margin-top: auto;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    #theme-yscworks .yscworks-help-card > a:hover { text-decoration: underline; }
+    #theme-yscworks .yscworks-help-next {
+      margin-top: 36px;
+      padding: 22px 26px;
+      background: var(--panel-cream);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    #theme-yscworks .yscworks-help-next p {
+      margin: 0;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+    }
+    #theme-yscworks .yscworks-help-next p span {
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    #theme-yscworks .yscworks-help-next a {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14.5px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    #theme-yscworks .yscworks-help-next a:hover { text-decoration: underline; }
+
+    /* ===== 4. 实践数据 ===== */
+    #theme-yscworks .yscworks-lab-stats {
+      padding: 0 0 72px;
+    }
+    #theme-yscworks .yscworks-lab-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      border-top: 1px solid var(--border-card);
+      border-bottom: 1px solid var(--border-card);
+      padding: 36px 0;
+    }
+    @media (max-width: 760px) { #theme-yscworks .yscworks-lab-stat-grid { grid-template-columns: repeat(2, 1fr); } }
+    #theme-yscworks .yscworks-lab-stat-grid article {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    #theme-yscworks .yscworks-lab-stat-grid strong {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    #theme-yscworks .yscworks-lab-stat-grid span {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== 5. START HERE ===== */
+    #theme-yscworks .yscworks-route-section {
+      padding: 0 0 72px;
+    }
+    #theme-yscworks .yscworks-route-heading {
+      margin-bottom: 32px;
+    }
+    #theme-yscworks .yscworks-route-heading h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-route-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 760px) { #theme-yscworks .yscworks-route-grid { grid-template-columns: 1fr; } }
+    #theme-yscworks .yscworks-route-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 22px 24px;
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      background: var(--panel);
+      text-decoration: none;
+      transition: border-color 0.18s ease, transform 0.18s ease;
+    }
+    #theme-yscworks .yscworks-route-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-2px);
+    }
+    #theme-yscworks .yscworks-route-card > span {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: ui-monospace, Consolas, monospace;
+    }
+    #theme-yscworks .yscworks-route-card > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    #theme-yscworks .yscworks-route-card strong {
+      font-size: 16.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-route-card small {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    #theme-yscworks .yscworks-route-card i {
+      font-style: normal;
+      color: var(--text-secondary);
+      font-size: 17px;
+      transition: transform 0.18s ease, color 0.18s ease;
+    }
+    #theme-yscworks .yscworks-route-card:hover i { transform: translateX(3px); color: var(--accent); }
+
+    /* ===== 6. WHAT I DO ===== */
+    #theme-yscworks .yscworks-lab-map {
+      padding: 72px 0;
+      border-top: 1px solid var(--border-card);
+    }
+    #theme-yscworks .yscworks-lab-map-grid {
+      display: grid;
+      gap: 20px;
+    }
+    #theme-yscworks .yscworks-lab-map-grid-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 860px) { #theme-yscworks .yscworks-lab-map-grid-three { grid-template-columns: 1fr; } }
+    #theme-yscworks .yscworks-lab-map-card {
+      padding: 30px 28px;
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #theme-yscworks .yscworks-lab-map-card:hover { border-color: var(--border-card-hover); }
+    #theme-yscworks .yscworks-lab-map-card > span {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+    #theme-yscworks .yscworks-lab-map-card h3 {
+      font-size: 21px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-lab-map-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    #theme-yscworks .yscworks-lab-map-card a {
+      margin-top: auto;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    #theme-yscworks .yscworks-lab-map-card a:hover { text-decoration: underline; }
+
+    /* ===== 7. CURRENT PRODUCTS（产品矩阵，复用 yscworks-case） ===== */
+    #theme-yscworks .yscworks-lab-projects {
+      padding: 72px 0;
+      border-top: 1px solid var(--border-card);
+    }
+    #theme-yscworks .yscworks-lab-project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 900px) { #theme-yscworks .yscworks-lab-project-grid { grid-template-columns: 1fr; } }
+    #theme-yscworks .yscworks-lab-project-grid .yscworks-case {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 0;
+    }
+
+    /* ===== 8. RECENTLY SHIPPING ===== */
+    #theme-yscworks .yscworks-lab-updates {
+      padding: 72px 0;
+      border-top: 1px solid var(--border-card);
+    }
+    #theme-yscworks .yscworks-lab-updates-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { #theme-yscworks .yscworks-lab-updates-grid { grid-template-columns: 1fr; gap: 32px; } }
+    #theme-yscworks .yscworks-update-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    #theme-yscworks .yscworks-update-list a {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      padding: 16px 6px;
+      border-bottom: 1px solid var(--border-card);
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+    #theme-yscworks .yscworks-update-list a:hover { background: var(--panel); }
+    #theme-yscworks .yscworks-update-list span {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+      white-space: nowrap;
+      min-width: 150px;
+    }
+    #theme-yscworks .yscworks-update-list strong {
+      flex: 1;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-update-list em {
+      font-style: normal;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    /* ===== 9. FREE COMMUNITY ===== */
+    #theme-yscworks .yscworks-lab-resource {
+      padding: 72px 0;
+      border-top: 1px solid var(--border-card);
+    }
+    #theme-yscworks .yscworks-lab-resource-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { #theme-yscworks .yscworks-lab-resource-grid { grid-template-columns: 1fr; gap: 32px; } }
+    #theme-yscworks .yscworks-resource-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    #theme-yscworks .yscworks-resource-links a {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 20px 24px;
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      background: var(--panel);
+      text-decoration: none;
+      transition: border-color 0.18s ease;
+    }
+    #theme-yscworks .yscworks-resource-links a:hover { border-color: var(--border-card-hover); }
+    #theme-yscworks .yscworks-resource-links span {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    #theme-yscworks .yscworks-resource-links strong {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-resource-links em {
+      font-style: normal;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== 10. 写作区块 ===== */
+    #theme-yscworks .yscworks-lab-writing {
+      padding: 72px 0;
+      border-top: 1px solid var(--border-card);
+    }
+    #theme-yscworks .yscworks-lab-writing-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { #theme-yscworks .yscworks-lab-writing-grid { grid-template-columns: 1fr; gap: 32px; } }
+    #theme-yscworks .yscworks-lab-note-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    #theme-yscworks .yscworks-lab-note-list a {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      padding: 16px 6px;
+      border-bottom: 1px solid var(--border-card);
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+    #theme-yscworks .yscworks-lab-note-list a:hover { background: var(--panel); }
+    #theme-yscworks .yscworks-lab-note-list span {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: ui-monospace, Consolas, monospace;
+    }
+    #theme-yscworks .yscworks-lab-note-list strong {
+      flex: 1;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-lab-note-list em {
+      font-style: normal;
+      font-size: 13px;
+      color: var(--text-secondary);
+      white-space: nowrap;
     }
 
     ${themeConsoleStyle('yscworks', CONFIG)}
