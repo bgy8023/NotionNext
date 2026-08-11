@@ -1,9 +1,8 @@
 'use client'
 
+import React from 'react'
 import NotionPage from '@/components/NotionPage'
 import { siteConfig } from '@/lib/config'
-import { useGlobal } from '@/lib/global'
-import { isBrowser } from '@/lib/utils'
 import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -14,6 +13,32 @@ import CONFIG from './config'
 import { Style } from './style'
 
 /**
+ * 错误边界：捕获子组件渲染错误并打印到 console，避免整页空白
+ */
+class ErrorBoundary extends React.Component {
+  constructor(props) { super(props); this.state = { hasError: false, error: null } }
+  static getDerivedStateFromError(error) { return { hasError: true, error } }
+  componentDidCatch(error, info) {
+    // eslint-disable-next-line no-console
+    console.error('[yscworks ErrorBoundary]', error, info?.componentStack || '')
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '120px 24px', maxWidth: 820, margin: '0 auto', color: '#65584d' }}>
+          <h2 style={{ marginBottom: 12 }}>作品集区块加载失败</h2>
+          <p style={{ marginBottom: 8 }}>可能是某个项目卡片渲染异常。请检查 Notion 内容或在控制台查看错误：</p>
+          <pre style={{ background: 'rgba(91,63,41,.06)', padding: 16, borderRadius: 8, overflow: 'auto', fontSize: 13 }}>
+            {String(this.state.error?.message || this.state.error || '')}
+          </pre>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
+/**
  * 基础布局：所有页面都嵌入其中
  */
 const LayoutBase = props => {
@@ -22,7 +47,9 @@ const LayoutBase = props => {
     <div id='theme-yscworks'>
       <Style />
       <Header {...props} />
-      <main>{children}</main>
+      <main>
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </main>
       <Footer {...props} />
       <button
         className='yscworks-totop'
