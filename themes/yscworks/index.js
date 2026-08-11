@@ -23,6 +23,8 @@ import { SideBar } from './components/SideBar'
 import TitleBar from './components/TitleBar'
 import CONFIG from './config'
 import { Style } from './style'
+import { Hero } from './components/Hero'
+import { Coop } from './components/Coop'
 
 /**
  * 基础布局框架
@@ -50,8 +52,8 @@ const LayoutBase = props => {
 
       {/* 页头 */}
       <Header {...props} />
-      {/* 标题栏 */}
-      <TitleBar {...props} />
+      {/* 标题栏：仅文章详情页显示，首页/列表页由 Hero 承担 */}
+      {post && <TitleBar {...props} />}
 
       {/* 主体 */}
       <div id='container-inner' className='w-full relative z-10'>
@@ -63,7 +65,7 @@ const LayoutBase = props => {
           `}>
           {/* 内容 */}
           <div
-            className={`${fullWidth ? '' : LAYOUT_VERTICAL ? 'max-w-5xl' : 'max-w-3xl'} w-full xl:px-14 lg:px-4`}>
+            className={`${fullWidth ? '' : LAYOUT_VERTICAL ? 'max-w-5xl' : 'max-w-5xl'} w-full xl:px-14 lg:px-4`}>
             <Transition
               show={!onLoading}
               appear={true}
@@ -116,7 +118,13 @@ const LayoutBase = props => {
  * @returns 此主题首页就是列表
  */
 const LayoutIndex = props => {
-  return <LayoutPostList {...props} />
+  return (
+    <>
+      <Hero />
+      <LayoutPostList {...props} />
+      <Coop />
+    </>
+  )
 }
 
 /**

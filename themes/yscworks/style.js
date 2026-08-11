@@ -57,6 +57,125 @@ const Style = () => {
       color: var(--text-primary);
     }
 
+    /* ===== 顶部导航（yscai101 极简风格） ===== */
+    #theme-yscworks .yscworks-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      background: rgba(244, 237, 226, 0.82);
+      backdrop-filter: saturate(160%) blur(14px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    #theme-yscworks .yscworks-nav .yscworks-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    #theme-yscworks .yscworks-brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: .02em;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-navlinks { display: flex; gap: 30px; }
+    #theme-yscworks .yscworks-navlinks a {
+      color: var(--text-secondary);
+      font-size: .95rem;
+      transition: color .2s;
+    }
+    #theme-yscworks .yscworks-navlinks a:hover,
+    #theme-yscworks .yscworks-navlinks a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ===== Hero（首页顶部） ===== */
+    #theme-yscworks .yscworks-hero {
+      position: relative;
+      padding: 88px 0 40px;
+      overflow: hidden;
+    }
+    #theme-yscworks .yscworks-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 82% 14%, rgba(206, 66, 39, 0.18), transparent 10%),
+        radial-gradient(circle at 78% 12%, rgba(239, 186, 98, 0.24), transparent 18%),
+        radial-gradient(circle at 14% 64%, rgba(55, 101, 146, 0.08), transparent 18%),
+        linear-gradient(180deg, rgba(255, 250, 239, 0.8), rgba(244, 237, 226, 0));
+    }
+    #theme-yscworks .yscworks-hero .yscworks-container {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+    }
+    #theme-yscworks .yscworks-kicker {
+      font-size: .78rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    #theme-yscworks .yscworks-hero h1 {
+      max-width: 14ch;
+      font-size: clamp(2.8rem, 6vw, 4.6rem);
+      line-height: .96;
+      letter-spacing: -.055em;
+      margin-bottom: 22px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-hero p {
+      max-width: 590px;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+
+    /* ===== 合作 CTA ===== */
+    #theme-yscworks .yscworks-coop {
+      margin: 40px 0 20px;
+      padding: 48px;
+      border-radius: var(--radius-xl);
+      background: var(--gradient-accent);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    #theme-yscworks .yscworks-coop .yscworks-coop-label {
+      font-size: .82rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      opacity: .9;
+    }
+    #theme-yscworks .yscworks-coop h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 10px 0;
+      color: #fff;
+    }
+    #theme-yscworks .yscworks-coop p {
+      max-width: 620px;
+      opacity: .95;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    #theme-yscworks .yscworks-coop .yscworks-coop-row { display: flex; gap: 24px; }
+    #theme-yscworks .yscworks-coop .yscworks-coop-row a {
+      color: #fff;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, .5);
+      padding-bottom: 2px;
+    }
+
     /* ===== 作品卡片（BlogItem 渲染） ===== */
     #theme-yscworks .yscworks-case {
       display: grid;
