@@ -1,81 +1,70 @@
-import LazyImage from '@/components/LazyImage'
 import NotionIcon from '@/components/NotionIcon'
-import TwikooCommentCount from '@/components/TwikooCommentCount'
-import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
-import CONFIG from '../config'
 
 /**
- * 博客列表的单个卡片
+ * 作品集卡片 —— 复刻 yscai101.com/works 的 product-case 块
  * @param {*} param0
- * @returns
  */
-const BlogItem = ({ post }) => {
-  const showPageCover =
-    siteConfig('EXAMPLE_POST_LIST_COVER', null, CONFIG) &&
-    post?.pageCoverThumbnail
+const BlogItem = ({ post, index = 0, geo = false }) => {
+  if (!post) return null
+  const num = String(index + 1).padStart(2, '0')
+
+  const statusText = post.category || post.tags?.[0] || '项目'
+  const isLive = /上线|live|发布/.test(statusText)
+  const isBuilding = /开发|building|wip|进行/.test(statusText)
+  const statusClass = isLive ? 'live' : isBuilding ? 'building' : 'live'
+  const statusLabel = isLive ? '已上线' : isBuilding ? '开发中' : statusText
+
+  const strip = (post.tags || []).filter(t => t !== statusText).slice(0, 4)
+  const cover = post.pageCoverThumbnail || post.pageCover
 
   return (
-    <article
-      className={`${showPageCover ? 'flex md:flex-row flex-col-reverse' : ''} replace mb-12 `}>
-      <div className={`${showPageCover ? 'md:w-7/12' : ''}`}>
-        <h2 className='mb-4'>
-          <SmartLink
-            href={post?.href}
-            className='text-black dark:text-gray-100 text-xl md:text-2xl no-underline hover:underline'>
-            {siteConfig('POST_TITLE_ICON') && (
-              <NotionIcon icon={post.pageIcon} />
-            )}
-            {post?.title}
-          </SmartLink>
-        </h2>
-
-        <div className='mb-4 text-sm text-gray-700 dark:text-gray-300'>
-          by{' '}
-          <a href='#' className='text-gray-700 dark:text-gray-300'>
-            {siteConfig('AUTHOR')}
-          </a>{' '}
-          on {post.date?.start_date || post.createdTime}
-          <TwikooCommentCount post={post} className='pl-1' />
-          {post.category && (
-            <>
-              <span className='font-bold mx-1'> | </span>
-              <SmartLink
-                href={`/category/${post.category}`}
-                className='text-gray-700 dark:text-gray-300 hover:underline'>
-                {post.category}
-              </SmartLink>
-            </>
-          )}
-          {/* <span className="font-bold mx-1"> | </span> */}
-          {/* <a href="#" className="text-gray-700">2 Comments</a> */}
+    <article className='yscworks-case replace' id={post.slug}>
+      <div>
+        <div className='yscworks-meta'>
+          <span className={`yscworks-status ${statusClass}`}><i />{statusLabel}</span>
+          {post.category && <span>{post.category}</span>}
         </div>
 
-        {!post.results && (
-          <p className='line-clamp-3 text-gray-700 dark:text-gray-400 leading-normal'>
-            {post.summary}
-          </p>
+        <div className='yscworks-title'>
+          {post.pageIcon ? (
+            <span className='yscworks-icon'><NotionIcon icon={post.pageIcon} /></span>
+          ) : null}
+          <div>
+            <p className='yscworks-num'>{num} / {post.title}</p>
+            <h2>
+              <SmartLink href={post.href}>{post.title}</SmartLink>
+            </h2>
+          </div>
+        </div>
+
+        {post.summary && <p className='yscworks-lead'>{post.summary}</p>}
+
+        {strip.length > 0 && (
+          <div className='yscworks-strip'>
+            {strip.map((t, i) => <span key={i}>{t}</span>)}
+          </div>
         )}
-        {/* 搜索结果 */}
-        {post.results && (
-          <p className='line-clamp-3 mt-4 text-gray-700 dark:text-gray-300 text-sm font-light leading-7'>
-            {post.results.map((r, index) => (
-              <span key={index}>{r}</span>
-            ))}
-          </p>
-        )}
+
+        <div className='yscworks-actions'>
+          <SmartLink href={post.href} className='yscworks-btn primary'>
+            查看项目 <span>→</span>
+          </SmartLink>
+        </div>
       </div>
-      {/* 图片封面 */}
-      {showPageCover && (
-        <div className='md:w-5/12 w-full h-44 overflow-hidden p-1'>
-          <SmartLink href={post?.href} passHref legacyBehavior>
-            <LazyImage
-              src={post?.pageCoverThumbnail}
-              className='w-full bg-cover hover:scale-110 duration-200'
-            />
-          </SmartLink>
+
+      <div className={`yscworks-visual ${geo ? 'geo' : ''}`}>
+        <span className='vnum'>{num}—04</span>
+        {cover ? (
+          <img src={cover} alt={post.title} />
+        ) : post.pageIcon ? (
+          <NotionIcon icon={post.pageIcon} />
+        ) : null}
+        <div>
+          <small>{statusLabel.toUpperCase()}</small>
+          <strong>{post.title}</strong>
         </div>
-      )}
+      </div>
     </article>
   )
 }

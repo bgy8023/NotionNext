@@ -1,32 +1,24 @@
 /**
- * yscworks 主题配置
- * 这些 KEY 可在 Vercel 用同名环境变量覆盖（前缀 NEXT_PUBLIC_THEME_YSCWORKS_）
- * 例如 NEXT_PUBLIC_THEME_YSCWORKS_HERO_TITLE=...
+ * 主题配置文件
  */
 const CONFIG = {
-  // 导航品牌名
-  YSCWORKS_BRAND: '成云杉 YSC',
-  // 导航项 [{label, href}]
-  YSCWORKS_NAV: [
-    { label: '首页', href: '/' },
-    { label: '写作', href: '/category' },
-    { label: '项目', href: '/' },
-    { label: '关于', href: '/about' },
-    { label: '联系', href: '/contact' }
-  ],
+  EXAMPLE_COLOR_PRIMARY: '#6b7280',
+  EXAMPLE_COLOR_BG: '#ffffff',
+  EXAMPLE_COLOR_CARD: '#f3f4f6',
+  EXAMPLE_COLOR_BORDER: '#e5e7eb',
 
-  // 首页 Hero
-  YSCWORKS_HERO_KICKER: 'PRODUCTS · BUILD IN PUBLIC',
-  YSCWORKS_HERO_TITLE: '把想法做出来，再让真实反馈说话。',
-  YSCWORKS_HERO_DESC: '我不是传统程序员，而是用 AI 编程推进产品的创作者。这里不只展示名称，也说明每个项目当前做到哪里。',
+  // 菜单配置
+  EXAMPLE_MENU_CATEGORY: true, // 显示分类
+  EXAMPLE_MENU_TAG: true, // 显示标签
+  EXAMPLE_MENU_ARCHIVE: true, // 显示归档
+  EXAMPLE_MENU_SEARCH: true, // 显示搜索
 
-  // 合作 CTA
-  YSCWORKS_COOP_LABEL: 'PRODUCT COOPERATION',
-  YSCWORKS_COOP_TITLE: '🉑 接具体的 AI 小产品与工具合作。',
-  YSCWORKS_COOP_DESC: '请说明你想解决的问题、目标用户、预算和期望结果。我会先判断项目是否适合做，再决定合作方式。',
+  EXAMPLE_POST_LIST_COVER: true, // 列表显示文章封面
 
-  // 页脚
-  YSCWORKS_FOOTER_DESC: '一个用 AI 做产品的创作者，持续搭工作流、写真实实践的公开记录。'
+  EXAMPLE_TITLE_IMAGE: false, // 标题栏，是否背景图片
+
+  // 文章页面布局
+  EXAMPLE_ARTICLE_LAYOUT_VERTICAL: false, // 文章详情，左右布局改为上下布局
+  EXAMPLE_ARTICLE_HIDDEN_NOTIFICATION: false // 文章详情隐藏公告
 }
-
 export default CONFIG

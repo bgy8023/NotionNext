@@ -1,35 +1,28 @@
 import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
-import CONFIG from '../config'
+import { MenuList } from './MenuList'
 
 /**
- * 顶部导航
+ * 网站顶部
+ * LOGO 和 菜单
+ * @returns
  */
-const Header = ({ post }) => {
-  const brand = siteConfig('YSCWORKS_BRAND', '成云杉 YSC', CONFIG)
-  let nav = siteConfig('YSCWORKS_NAV', CONFIG.YSCWORKS_NAV, CONFIG)
-  // 兼容字符串 / 对象两种配置
-  if (typeof nav === 'string') {
-    try { nav = JSON.parse(nav) } catch (e) { nav = CONFIG.YSCWORKS_NAV }
-  }
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
-
+export const Header = props => {
   return (
-    <nav className='yscworks-nav'>
-      <div className='yscworks-container'>
-        <SmartLink href='/' className='yscworks-brand'>{brand}</SmartLink>
-        <div className='yscworks-navlinks'>
-          {nav?.map((item, i) => (
-            <SmartLink
-              key={i}
-              href={item.href}
-              className={currentPath === item.href ? 'active' : ''}
-            >{item.label}</SmartLink>
-          ))}
+    <header className='w-full px-6 bg-white  dark:bg-black relative z-20'>
+      <div className='mx-auto max-w-4xl md:flex justify-between items-center'>
+        <SmartLink
+          href='/'
+          className='logo py-6 w-full text-center md:text-left md:w-auto text-gray-dark no-underline flex justify-center items-center'>
+          {siteConfig('TITLE')}
+        </SmartLink>
+        <div className='w-full md:w-auto text-center md:text-right'>
+          {/* 右侧文字 */}
         </div>
       </div>
-    </nav>
+
+      {/* 菜单 */}
+      <MenuList {...props} />
+    </header>
   )
 }
-
-export { Header }
