@@ -18,24 +18,26 @@ const BlogItem = ({ post, index = 0, geo = false }) => {
   if (!post) return null
   const num = String(index + 1).padStart(2, '0')
 
-  // 状态推断：category 或首个 tag 含关键词
-  const statusText = post.category || post.tags?.[0] || '项目'
-  const isLive = /上线|live|发布|release/.test(statusText)
-  const isBuilding = /开发|building|wip|进行|dev/.test(statusText)
-  const statusClass = isLive ? 'live' : isBuilding ? 'building' : 'live'
-  const statusLabel = isLive ? '已上线' : isBuilding ? '开发中' : statusText
+  // 状态推断：仅在 category+tags 命中「开发|wip|内测|进行」时为「开发中」，否则默认「已上线」
+  const corpus = [post.category, ...(post.tags || [])].filter(Boolean).join(' ')
+  const isBuilding = /开发|内测|进行|wip|building|dev/i.test(corpus)
+  const statusLabel = isBuilding ? '开发中' : '已上线'
+  const statusClass = isBuilding ? 'building' : 'live'
 
-  // 特性标签：过滤掉状态词与分类词
-  const strip = (post.tags || [])
-    .filter(t => t !== statusText && t !== post.category)
-    .slice(0, 4)
+  // 分类显示：与状态文本重复则隐藏
+  const showCategory = post.category && post.category !== statusLabel
+
+  // 特性标签：过滤状态词
+  const strip = (post.tags || []).filter(t => t !== statusLabel).slice(0, 4)
 
   const cover = post.pageCoverThumbnail || post.pageCover
   const summary = post.summary || ''
 
-  // 视觉块关键词：优先用标签，其次固定「诊断 · 规划 · 建设 · 复盘」
+  // 视觉块关键词
   const vtagText = strip.length ? strip.join(' · ') : 'BUILD · SHIP · LEARN'
   const rangeText = `${String(index + 1).padStart(2, '0')}—${String(Math.max(index + 1, 4)).padStart(2, '0')}`
+  // 编号项目名：截取标题前 12 字符（参考站是短代号）
+  const shortName = post.title.length > 12 ? post.title.slice(0, 12) + '…' : post.title
 
   return (
     <article className='yscworks-case replace' id={post.slug}>
@@ -44,8 +46,12 @@ const BlogItem = ({ post, index = 0, geo = false }) => {
           {/* 状态 / 分类行 */}
           <div className='yscworks-meta'>
             <span className={`yscworks-status ${statusClass}`}><i />{statusLabel}</span>
-            <span className='yscworks-meta-sep'>·</span>
-            <span>{post.category || '作品'}</span>
+            {showCategory && (
+              <>
+                <span className='yscworks-meta-sep'>·</span>
+                <span>{post.category}</span>
+              </>
+            )}
           </div>
 
           {/* Logo / 封面 */}
@@ -56,7 +62,7 @@ const BlogItem = ({ post, index = 0, geo = false }) => {
           ) : null}
 
           {/* 编号 */}
-          <p className='yscworks-num'>{num} / {post.title.toUpperCase ? post.title.toUpperCase().slice(0, 24) : ''}</p>
+          <p className='yscworks-num'>{num} / {shortName}</p>
 
           {/* H2 大标题 */}
           <h2 className='yscworks-title-h2'>
@@ -81,8 +87,8 @@ const BlogItem = ({ post, index = 0, geo = false }) => {
           </div>
         </div>
 
-        {/* 右视觉块（浅绿/深绿交替） */}
-        <div className={`yscworks-visual ${geo ? 'dark-green' : index % 2 === 1 ? 'dark-green' : 'light-green'}`}>
+        {/* 右视觉块（绿/浅绿交替，首卡 geo 或首项用深绿） */}
+        <div className={`yscworks-visual ${geo || index === 0 ? 'dark-green' : (index % 2 === 0 ? 'light-green' : 'dark-green')}`}>
           <div>
             <p className='vnum'>{rangeText}</p>
             <p className='vtags'>{vtagText}</p>

@@ -43,6 +43,7 @@ const QuickAccess = () => {
 
       <div
         className={`yscworks-quick-overlay ${open ? 'is-open' : ''}`}
+        style={{ display: open ? 'flex' : 'none' }}
         role='dialog'
         aria-modal='true'
         onClick={e => { if (e.target === e.currentTarget) setOpen(false) }}>
