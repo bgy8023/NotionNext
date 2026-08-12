@@ -70,7 +70,12 @@ const Hero = () => {
           <div className='yscworks-console-build' aria-live='polite'>
             <div>
               <span>live signal</span>
-              <strong>{cSignal}</strong>
+              <strong
+                id='yscworksConsoleSignal'
+                data-messages={JSON.stringify(
+                  siteConfig('YSCWORKS_HERO_CONSOLE_SIGNALS', CONFIG.YSCWORKS_HERO_CONSOLE_SIGNALS, CONFIG)
+                )}
+              >{cSignal}</strong>
             </div>
             <div className='yscworks-console-progress'><i /></div>
             <small>BUILD IN PUBLIC · 持续更新</small>

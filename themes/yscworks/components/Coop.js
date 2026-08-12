@@ -1,5 +1,6 @@
 import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
+import CONFIG from '../config'
 
 /**
  * 合作 CTA 卡 —— 严格对齐 yscai101.com/works 底部合作区块
@@ -7,16 +8,17 @@ import SmartLink from '@/components/SmartLink'
  * @param {*} props
  */
 const Coop = () => {
-  const label = siteConfig('YSCWORKS_COOP_LABEL', 'PRODUCT COOPERATION')
-  const title = siteConfig('YSCWORKS_COOP_TITLE', '🉑 接具体的 AI 小产品与工具合作。')
+  const label = siteConfig('YSCWORKS_COOP_LABEL', CONFIG.YSCWORKS_COOP_LABEL, CONFIG)
+  const title = siteConfig('YSCWORKS_COOP_TITLE', CONFIG.YSCWORKS_COOP_TITLE, CONFIG)
   const desc = siteConfig(
     'YSCWORKS_COOP_DESC',
-    '请说明你想解决的问题、目标用户、预算和期望结果。我会先判断项目是否适合做，再决定合作方式。'
+    CONFIG.YSCWORKS_COOP_DESC,
+    CONFIG
   )
-  const available = siteConfig('YSCWORKS_COOP_AVAILABLE', 'AVAILABLE')
+  const available = siteConfig('YSCWORKS_COOP_AVAILABLE', CONFIG.YSCWORKS_COOP_AVAILABLE || 'AVAILABLE', CONFIG)
   return (
     <section className='yscworks-coop'>
-      <div className='ysc-container'>
+      <div className='yscworks-container'>
         <div className='yscworks-coop-card'>
           <p className='yscworks-coop-label'>{label}</p>
           <h2>{title}</h2>

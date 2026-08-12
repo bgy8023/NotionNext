@@ -1456,6 +1456,98 @@ const Style = () => {
     }
 
     /* ================================================================
+       客户端交互效果 CSS（Effects.js 配套）
+       ================================================================ */
+    #theme-yscworks .yscworks-cursor-glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 77, 51, 0.08), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left 0.3s ease, top 0.3s ease;
+    }
+    #theme-yscworks .yscworks-lab-hero {
+      position: relative;
+      overflow: hidden;
+    }
+    #theme-yscworks #yscworksConsoleSignal {
+      display: inline-block;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    #theme-yscworks #yscworksConsoleSignal.switching {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    #theme-yscworks .fade-in,
+    #theme-yscworks .yscworks-fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #theme-yscworks .fade-in-left,
+    #theme-yscworks .yscworks-fade-in-left {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #theme-yscworks .fade-in-right,
+    #theme-yscworks .yscworks-fade-in-right {
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #theme-yscworks .fade-in.visible,
+    #theme-yscworks .yscworks-fade-in.visible,
+    #theme-yscworks .fade-in.yscworks-visible,
+    #theme-yscworks .yscworks-fade-in.yscworks-visible,
+    #theme-yscworks .fade-in-left.visible,
+    #theme-yscworks .yscworks-fade-in-left.visible,
+    #theme-yscworks .fade-in-right.visible,
+    #theme-yscworks .yscworks-fade-in-right.visible {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    #theme-yscworks .yscworks-nav.scrolled {
+      background: rgba(244, 237, 226, 0.92);
+      backdrop-filter: saturate(160%) blur(14px);
+      box-shadow: 0 1px 0 var(--border-card);
+    }
+    #theme-yscworks .yscworks-back-to-top,
+    #theme-yscworks .back-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 50;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--panel);
+      border: 1px solid var(--border-card);
+      color: var(--text-primary);
+      font-size: 22px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    }
+    #theme-yscworks .yscworks-back-to-top.visible,
+    #theme-yscworks .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    #theme-yscworks .yscworks-stat-number {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ================================================================
        yscai101.com 完整 CSS 移植（150KB 原版 → yscworks- 前缀作用域化）
        ================================================================ */
     ${PORT_STYLES}

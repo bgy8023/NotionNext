@@ -55,6 +55,13 @@ const CONFIG = {
     { key: 'status', value: '持续更新中' }
   ],
   YSCWORKS_HERO_CONSOLE_SIGNAL: 'AI 内容工作流：持续迭代',
+  // console 卡实时信号轮播（留空则显示静态文本）
+  YSCWORKS_HERO_CONSOLE_SIGNALS: [
+    'AI 内容工作流：持续迭代',
+    'AI 产品矩阵：正在推进',
+    'AI 生成：把 AI 放进真实工作流',
+    '对外开放具体项目与定制合作'
+  ],
   YSCWORKS_HERO_CONSOLE_MANIFESTO: '先做出来，\n再让真实反馈说话。',
   YSCWORKS_HERO_CONSOLE_SIGN: 'Mars · 2026',
 

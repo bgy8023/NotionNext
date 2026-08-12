@@ -34,6 +34,8 @@ import { WhatIDo } from './components/WhatIDo'
 import { Projects } from './components/Projects'
 import { Updates } from './components/Updates'
 import { Community } from './components/Community'
+import { Effects } from './components/Effects'
+import { WorksList } from './components/WorksList'
 
 /**
  * 基础布局框架
@@ -109,17 +111,18 @@ const LayoutBase = props => {
       <Footer {...props} />
 
       {/* 回顶按钮 */}
-      <div className='fixed right-4 bottom-4 z-10'>
-        <div
-          title={locale.POST.TOP}
-          className='cursor-pointer p-2 text-center'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <i className='fas fa-angle-up text-2xl' />
-        </div>
-      </div>
+      <button
+        className='yscworks-back-to-top back-to-top'
+        aria-label='返回顶部'
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        ↑
+      </button>
 
       {/* ⌘ Call me 快捷入口 */}
       <QuickAccess />
+
+      {/* 客户端交互效果（信号轮播/光晕/渐入/计数/滚动） */}
+      <Effects />
     </div>
   )
 }
@@ -402,15 +405,78 @@ const LayoutTagIndex = props => {
   )
 }
 
+/**
+ * /works 项目与产品矩阵页
+ */
+const LayoutWorks = props => {
+  const { posts } = props
+  return (
+    <WorksList posts={posts || []} showHero={true} showCta={true} />
+  )
+}
+
+/**
+ * /contact 联系与服务页
+ */
+const LayoutContact = props => {
+  const label = siteConfig('YSCWORKS_COOP_LABEL', 'SERVICE · CONTACT')
+  const title = '先把问题说具体，我们再谈合作。'
+  const desc = '请直接说明你在做什么、遇到什么问题、预算范围和希望得到的结果。我会判断目前是否适合做，不合适也会直接说明。'
+  let cards = siteConfig('YSCWORKS_HELP_CARDS', [])
+  if (typeof cards === 'string') { try { cards = JSON.parse(cards) } catch (e) { cards = [] } }
+
+  return (
+    <>
+      <section className='yscworks-lab-hero' style={{ padding: '148px 0 52px' }}>
+        <div className='yscworks-container yscworks-lab-hero-grid'>
+          <div className='yscworks-lab-hero-copy'>
+            <div className='yscworks-lab-kicker'>
+              <span className='yscworks-live-dot' />
+              {label}
+            </div>
+            <h1>{title}</h1>
+            <p className='yscworks-lab-lead'>{desc}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className='yscworks-section'>
+        <div className='yscworks-container'>
+          <div className='yscworks-lab-section-head'>
+            <p className='yscworks-section-label'>SERVICES</p>
+            <h2>目前开放的合作方向。</h2>
+            <p>服务围绕正在真实使用和持续迭代的能力展开。</p>
+          </div>
+          <div className='yscworks-help-grid'>
+            {(cards || []).map((c, i) => (
+              <article key={i} className='yscworks-help-card'>
+                <span className='yscworks-help-index'>{c.index}</span>
+                <h3>{c.title}</h3>
+                <p className='yscworks-help-situation'><b>你可能正在：</b>{c.situation}</p>
+                <div className='yscworks-help-delivery'><span>我可以帮你</span><p>{c.delivery}</p></div>
+                {c.proof && <div className='yscworks-help-proof'><span>已有实践</span><strong>{c.proof}</strong></div>}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Coop />
+    </>
+  )
+}
+
 export {
   Layout404,
   LayoutArchive,
   LayoutBase,
   LayoutCategoryIndex,
+  LayoutContact,
   LayoutIndex,
   LayoutPostList,
   LayoutSearch,
   LayoutSlug,
   LayoutTagIndex,
+  LayoutWorks,
   CONFIG as THEME_CONFIG
 }

@@ -12,12 +12,21 @@ const Stats = () => {
   return (
     <section className='yscworks-lab-stats section' aria-label='实践数据'>
       <div className='yscworks-container yscworks-lab-stat-grid'>
-        {stats.map((s, i) => (
-          <article key={i}>
-            <strong>{s.value}</strong>
-            <span>{s.label}</span>
-          </article>
-        ))}
+        {stats.map((s, i) => {
+          const numMatch = String(s.value).match(/^([\d,]+)/)
+          const num = numMatch ? parseInt(numMatch[1].replace(/,/g, ''), 10) : 0
+          const suffix = String(s.value).replace(/^[\d,]+/, '')
+          return (
+            <article key={i}>
+              <strong
+                className='yscworks-stat-number'
+                data-count={num}
+                data-suffix={suffix}
+              >{s.value}</strong>
+              <span>{s.label}</span>
+            </article>
+          )
+        })}
       </div>
     </section>
   )
