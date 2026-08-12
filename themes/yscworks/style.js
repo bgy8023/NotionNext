@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import CONFIG from './config'
 import { themeConsoleStyle } from '@/lib/themeConsoleStyle'
+import { PORT_STYLES } from './port-styles'
 
 /**
  * yscworks 主题全局样式 —— 严格对齐 yscai101.com/works 编辑风暖纸质感
@@ -1453,6 +1454,11 @@ const Style = () => {
       color: var(--text-secondary);
       white-space: nowrap;
     }
+
+    /* ================================================================
+       yscai101.com 完整 CSS 移植（150KB 原版 → yscworks- 前缀作用域化）
+       ================================================================ */
+    ${PORT_STYLES}
 
     ${themeConsoleStyle('yscworks', CONFIG)}
   `}</style>
