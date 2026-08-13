@@ -353,91 +353,93 @@ const getSEOMeta = (props, router, locale) => {
   const keyword = router?.query?.s
 
   const TITLE = siteConfig('TITLE')
+  const DESCRIPTION = siteConfig('DESCRIPTION')
+  const PAGE_COVER = siteInfo?.pageCover
   switch (router.route) {
     case '/':
       return {
-        title: `${siteInfo?.title} | ${siteInfo?.description}`,
-        description: `${siteInfo?.description}`,
-        image: `${siteInfo?.pageCover}`,
+        title: `${TITLE}`,
+        description: `${DESCRIPTION}`,
+        image: `${PAGE_COVER}`,
         slug: '',
         type: 'website'
       }
     case '/archive':
       return {
-        title: `${locale.NAV.ARCHIVE} | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
-        image: `${siteInfo?.pageCover}`,
+        title: `${locale.NAV.ARCHIVE} | ${TITLE}`,
+        description: `${DESCRIPTION}`,
+        image: `${PAGE_COVER}`,
         slug: 'archive',
         type: 'website'
       }
     case '/page/[page]':
       return {
-        title: `${page} | Page | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
-        image: `${siteInfo?.pageCover}`,
+        title: `${page} | Page | ${TITLE}`,
+        description: `${DESCRIPTION}`,
+        image: `${PAGE_COVER}`,
         slug: 'page/' + page,
         type: 'website'
       }
     case '/category/[category]':
       return {
-        title: `${category} | ${locale.COMMON.CATEGORY} | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
+        title: `${category} | ${locale.COMMON.CATEGORY} | ${TITLE}`,
+        description: `${DESCRIPTION}`,
         slug: 'category/' + category,
-        image: `${siteInfo?.pageCover}`,
+        image: `${PAGE_COVER}`,
         type: 'website'
       }
     case '/category/[category]/page/[page]':
       return {
-        title: `${category} | ${locale.COMMON.CATEGORY} | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
+        title: `${category} | ${locale.COMMON.CATEGORY} | ${TITLE}`,
+        description: `${DESCRIPTION}`,
         slug: 'category/' + category,
-        image: `${siteInfo?.pageCover}`,
+        image: `${PAGE_COVER}`,
         type: 'website'
       }
     case '/tag/[tag]':
     case '/tag/[tag]/page/[page]':
       return {
-        title: `${tag} | ${locale.COMMON.TAGS} | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
-        image: `${siteInfo?.pageCover}`,
+        title: `${tag} | ${locale.COMMON.TAGS} | ${TITLE}`,
+        description: `${DESCRIPTION}`,
+        image: `${PAGE_COVER}`,
         slug: 'tag/' + tag,
         type: 'website'
       }
     case '/search':
       return {
-        title: `${keyword || ''}${keyword ? ' | ' : ''}${locale.NAV.SEARCH} | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
-        image: `${siteInfo?.pageCover}`,
+        title: `${keyword || ''}${keyword ? ' | ' : ''}${locale.NAV.SEARCH} | ${TITLE}`,
+        description: `${DESCRIPTION}`,
+        image: `${PAGE_COVER}`,
         slug: 'search',
         type: 'website'
       }
     case '/search/[keyword]':
     case '/search/[keyword]/page/[page]':
       return {
-        title: `${keyword || ''}${keyword ? ' | ' : ''}${locale.NAV.SEARCH} | ${siteInfo?.title}`,
-        description: TITLE,
-        image: `${siteInfo?.pageCover}`,
+        title: `${keyword || ''}${keyword ? ' | ' : ''}${locale.NAV.SEARCH} | ${TITLE}`,
+        description: DESCRIPTION,
+        image: `${PAGE_COVER}`,
         slug: 'search/' + (keyword || ''),
         type: 'website'
       }
     case '/404':
       return {
-        title: `${siteInfo?.title} | ${locale.NAV.PAGE_NOT_FOUND}`,
-        image: `${siteInfo?.pageCover}`
+        title: `${TITLE} | ${locale.NAV.PAGE_NOT_FOUND}`,
+        image: `${PAGE_COVER}`
       }
     case '/tag':
       return {
-        title: `${locale.COMMON.TAGS} | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
-        image: `${siteInfo?.pageCover}`,
+        title: `${locale.COMMON.TAGS} | ${TITLE}`,
+        description: `${DESCRIPTION}`,
+        image: `${PAGE_COVER}`,
         slug: 'tag',
         type: 'website'
       }
     case '/category':
       return {
-        title: `${locale.COMMON.CATEGORY} | ${siteInfo?.title}`,
-        description: `${siteInfo?.description}`,
-        image: `${siteInfo?.pageCover}`,
+        title: `${locale.COMMON.CATEGORY} | ${TITLE}`,
+        description: `${DESCRIPTION}`,
+        image: `${PAGE_COVER}`,
         slug: 'category',
         type: 'website'
       }
@@ -447,12 +449,12 @@ const getSEOMeta = (props, router, locale) => {
         : post?.category
       return {
         title: post
-          ? `${post?.title} | ${siteInfo?.title}`
-          : `${siteInfo?.title} | loading`,
-        description: post?.summary,
+          ? `${post?.title} | ${TITLE}`
+          : `${TITLE}`,
+        description: post?.summary || DESCRIPTION,
         type: post?.type,
         slug: post?.slug,
-        image: post?.pageCoverThumbnail || `${siteInfo?.pageCover}`,
+        image: post?.pageCoverThumbnail || `${PAGE_COVER}`,
         category,
         tags: post?.tags,
         publishDay: post?.publishDay,

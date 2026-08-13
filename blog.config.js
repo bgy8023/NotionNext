@@ -18,6 +18,11 @@ const BLOG = {
 
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || 'NotionNext', // 您的昵称 例如 tangly1024
   BIO: process.env.NEXT_PUBLIC_BIO || '一个普通的干饭人🍚', // 作者简介
+  // 站点标题 / 描述（优先于 Notion 数据库 siteInfo，可用 NEXT_PUBLIC_TITLE / NEXT_PUBLIC_DESCRIPTION 覆盖）
+  TITLE: process.env.NEXT_PUBLIC_TITLE || 'Mars1024 - 用 AI 做产品与个人业务',
+  DESCRIPTION:
+    process.env.NEXT_PUBLIC_DESCRIPTION ||
+    '一个用 AI 做产品的创作者，持续搭工作流、写真实实践的公开记录。',
   LINK: process.env.NEXT_PUBLIC_LINK || 'https://tangly1024.com', // 网站地址
   KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || 'Notion, 博客', // 网站关键词 英文逗号隔开
   BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico', // blog favicon 配置, 默认使用 /public/favicon.ico，支持在线图片，如 https://img.imesong.com/favicon.png

@@ -7,6 +7,10 @@
  * 后续填入即可显示。
  */
 const CONFIG = {
+  // ===== 全局站点标题 / 描述（优先级高于 Notion siteInfo）=====
+  TITLE: 'Mars1024 - 用 AI 做产品与个人业务',
+  DESCRIPTION: '一个用 AI 做产品的创作者，持续搭工作流、写真实实践的公开记录。',
+
   // 导航品牌名 / 圆标字符
   YSCWORKS_BRAND: 'Mars1024',
   YSCWORKS_BRAND_MARK: 'M',
