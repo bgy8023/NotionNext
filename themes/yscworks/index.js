@@ -36,6 +36,8 @@ import { Updates } from './components/Updates'
 import { Community } from './components/Community'
 import { Effects } from './components/Effects'
 import { WorksList } from './components/WorksList'
+import { AboutDocument } from './components/AboutDocument'
+import { GeoComponent } from './components/GeoComponent'
 
 /**
  * 基础布局框架
@@ -466,12 +468,38 @@ const LayoutContact = props => {
   )
 }
 
+/**
+ * /about 关于创作者档案页
+ */
+const LayoutAbout = props => {
+  return (
+    <>
+      <AboutDocument {...props} />
+      <Coop />
+    </>
+  )
+}
+
+/**
+ * /geo 专题实验室页
+ */
+const LayoutGeo = props => {
+  return (
+    <>
+      <GeoComponent {...props} />
+      <Coop />
+    </>
+  )
+}
+
 export {
   Layout404,
+  LayoutAbout,
   LayoutArchive,
   LayoutBase,
   LayoutCategoryIndex,
   LayoutContact,
+  LayoutGeo,
   LayoutIndex,
   LayoutPostList,
   LayoutSearch,
