@@ -38,6 +38,9 @@ import { Effects } from './components/Effects'
 import { WorksList } from './components/WorksList'
 import { AboutDocument } from './components/AboutDocument'
 import { GeoComponent } from './components/GeoComponent'
+import { ProductCase } from './components/ProductCase'
+import { ServiceGrid } from './components/ServiceGrid'
+import { CommunityGrid } from './components/CommunityGrid'
 
 /**
  * 基础布局框架
@@ -408,58 +411,200 @@ const LayoutTagIndex = props => {
 }
 
 /**
- * /works 项目与产品矩阵页
+ * /works 项目与产品深度展厅页 (1:1 对齐 yscai101.com/works.html)
  */
 const LayoutWorks = props => {
   const { posts } = props
-  return (
-    <WorksList posts={posts || []} showHero={true} showCta={true} />
-  )
-}
+  const brand = siteConfig('YSCWORKS_BRAND', CONFIG.YSCWORKS_BRAND, CONFIG)
 
-/**
- * /contact 联系与服务页
- */
-const LayoutContact = props => {
-  const label = siteConfig('YSCWORKS_COOP_LABEL', 'SERVICE · CONTACT')
-  const title = '先把问题说具体，我们再谈合作。'
-  const desc = '请直接说明你在做什么、遇到什么问题、预算范围和希望得到的结果。我会判断目前是否适合做，不合适也会直接说明。'
-  let cards = siteConfig('YSCWORKS_HELP_CARDS', [])
-  if (typeof cards === 'string') { try { cards = JSON.parse(cards) } catch (e) { cards = [] } }
+  const defaultCases = [
+    {
+      id: 'case-geo',
+      code: 'YSC GEO LAB',
+      title: 'YSC GEO LAB · AI 搜索可见性实验室',
+      slogan: '面向生成式引擎 (GEO) 与 AI 搜索的可见性优化实验。',
+      lead: '随着 ChatGPT Search、Perplexity、Kimi、豆包等 AI 引擎成为新搜索入口，传统 SEO 正在向 GEO (Generative Engine Optimization) 演进。本实验室专注研究 AI 引用逻辑与可见性基线。',
+      status: '已上线',
+      category: '实验 · 咨询 · 工具',
+      tags: ['AI 搜索', 'GEO 诊断', '可见性优化', '技术咨询'],
+      facts: [
+        { label: '定位', value: 'AI 搜索可见性实验' },
+        { label: '状态', value: '持续研究与测试' },
+        { label: '支持', value: 'GEO 诊断报告 + 改造方案' }
+      ],
+      next: '持续更新 GEO 测评案例与落地实验。',
+      primaryLink: { href: '/geo', label: '进入 GEO 实验室' },
+      secondaryLink: { href: '/contact', label: '咨询 GEO 方案' },
+      visual: {
+        range: '01—04',
+        icon: '/assets/yscgeo-logo.svg',
+        strong: 'YSC GEO LAB',
+        small: 'GENERATIVE ENGINE OPTIMIZATION'
+      }
+    },
+    {
+      id: 'case-filedev',
+      code: 'FILEDEV',
+      title: 'FileDev · 跨端文件传输与开发辅助工具',
+      slogan: '局域网极速文件互传与开发者日常提效小工具。',
+      lead: '专为多设备开发与设计场景打造的轻量文件传输方案。支持零配置局域网极速直连、剪贴板多端同步与文本快传，无需登录第三方服务器。',
+      status: '测试中',
+      category: 'Web · 小程序 · 工具',
+      tags: ['WebRTC', '局域网互传', '小程序', '无损传输'],
+      facts: [
+        { label: '形态', value: 'Web / 微信小程序' },
+        { label: '核心', value: 'P2P 局域网直连' },
+        { label: '阶段', value: '小范围内测' }
+      ],
+      next: '正在完善小程序端剪贴板自动同步与断点续传。',
+      primaryLink: { href: 'https://filedev.mars1024.com', label: '访问 FileDev Web 版', target: '_blank' },
+      secondaryLink: { href: '/contact', label: '申请内测' },
+      visual: {
+        range: '02—04',
+        icon: '/assets/filedev-logo.png',
+        strong: 'FILEDEV',
+        small: 'FAST LAN FILE TRANSFER'
+      },
+      qr: {
+        src: '/assets/filedev-mini-program.png',
+        alt: 'FileDev 小程序码',
+        caption: '微信扫码体验 FileDev 小程序'
+      }
+    },
+    {
+      id: 'case-mxmy',
+      code: 'MXMY',
+      title: '秘心秘语 · 情感互动与解忧倾诉 AI 伴侣',
+      slogan: '基于大语言模型的沉浸式角色扮演与情感陪伴系统。',
+      lead: '深度定制人格设定与长记忆检索机制，提供全天候温情倾听、情绪疏导与趣味互动，让每一次对话都充满理解与共鸣。',
+      status: '开发中',
+      category: 'AI Agent · 移动端',
+      tags: ['LLM', '情感陪伴', '角色设定', '长记忆'],
+      facts: [
+        { label: '类型', value: 'AI 对话与陪伴' },
+        { label: '特性', value: '长上下文记忆 + 拟真语调' },
+        { label: '阶段', value: '模型调优与灰度测试' }
+      ],
+      next: '优化角色语调一致性与多轮对话记忆召回率。',
+      primaryLink: { href: '/contact', label: '了解方案' },
+      visual: {
+        range: '03—04',
+        icon: '/assets/mxmy-logo.png',
+        strong: 'MXMY',
+        small: 'AI COMPANION & AGENT'
+      }
+    },
+    {
+      id: 'case-saytype',
+      code: 'SAYTYPE',
+      title: 'SayType · 极速语音转文字与灵感速记助手',
+      slogan: '将语音即时转化为结构化笔记与 Markdown 卡片。',
+      lead: '结合前沿语音识别模型与智能重写算法，快速捕捉灵光一闪的念头，自动去除口语冗余并整理成清晰易读的书面表达。',
+      status: '规划中',
+      category: '桌面端 · 插件',
+      tags: ['ASR', '语音速记', 'Markdown 导出', '提效工具'],
+      facts: [
+        { label: '平台', value: 'Mac / 浏览器扩展' },
+        { label: '核心', value: '本地近场语音快识' },
+        { label: '阶段', value: '原型构思' }
+      ],
+      next: '技术选型与本地模型推理延时压测。',
+      primaryLink: { href: '/contact', label: '交流反馈' },
+      visual: {
+        range: '04—04',
+        icon: '/assets/saytype-logo.png',
+        strong: 'SAYTYPE',
+        small: 'VOICE TO STRUCTURED TEXT'
+      }
+    }
+  ]
 
   return (
     <>
-      <section className='yscworks-lab-hero' style={{ padding: '148px 0 52px' }}>
-        <div className='yscworks-container yscworks-lab-hero-grid'>
-          <div className='yscworks-lab-hero-copy'>
-            <div className='yscworks-lab-kicker'>
-              <span className='yscworks-live-dot' />
-              {label}
-            </div>
-            <h1>{title}</h1>
-            <p className='yscworks-lab-lead'>{desc}</p>
+      <section className='page-intro page-intro-works'>
+        <div className='container page-intro-grid'>
+          <div className='page-intro-copy fade-in'>
+            <p className='page-kicker'>WORKS · PORTFOLIO</p>
+            <h1>在实践中做出来的产品与项目。</h1>
+            <p className='page-summary'>
+              这里记录我使用 AI 独立设计、开发或主导落地的产品、工具与实验。坚持真实可用、持续迭代与解决具体问题。
+            </p>
           </div>
         </div>
       </section>
 
-      <section className='yscworks-section'>
-        <div className='yscworks-container'>
-          <div className='yscworks-lab-section-head'>
-            <p className='yscworks-section-label'>SERVICES</p>
-            <h2>目前开放的合作方向。</h2>
-            <p>服务围绕正在真实使用和持续迭代的能力展开。</p>
+      <section className='section product-case-section'>
+        <div className='container'>
+          {defaultCases.map((item, i) => (
+            <ProductCase key={item.id} defaultItem={item} index={i} />
+          ))}
+          {posts && posts.length > 0 && posts.map((p, i) => (
+            <ProductCase key={p.id || i} post={p} index={defaultCases.length + i} />
+          ))}
+        </div>
+      </section>
+
+      <Coop />
+    </>
+  )
+}
+
+/**
+ * /contact 联系与服务页 (1:1 对齐 yscai101.com/contact.html)
+ */
+const LayoutContact = props => {
+  const brand = siteConfig('YSCWORKS_BRAND', CONFIG.YSCWORKS_BRAND, CONFIG)
+
+  return (
+    <>
+      <section className='page-intro page-intro-contact'>
+        <div className='container page-intro-grid'>
+          <div className='page-intro-copy fade-in'>
+            <p className='page-kicker'>SERVICE · CONTACT</p>
+            <h1>先把问题说具体，我们再谈合作。</h1>
+            <p className='page-summary'>
+              请直接说明你在做什么、遇到什么问题、预算范围和希望得到的结果。我会判断目前是否适合做，不合适也会直接说明。
+            </p>
           </div>
-          <div className='yscworks-help-grid'>
-            {(cards || []).map((c, i) => (
-              <article key={i} className='yscworks-help-card'>
-                <span className='yscworks-help-index'>{c.index}</span>
-                <h3>{c.title}</h3>
-                <p className='yscworks-help-situation'><b>你可能正在：</b>{c.situation}</p>
-                <div className='yscworks-help-delivery'><span>我可以帮你</span><p>{c.delivery}</p></div>
-                {c.proof && <div className='yscworks-help-proof'><span>已有实践</span><strong>{c.proof}</strong></div>}
-              </article>
-            ))}
+          <aside className='page-intro-card fade-in-right'>
+            <h2>直接联系方式</h2>
+            <ul className='contact-direct-list'>
+              <li>
+                <strong>微信</strong>
+                <span>Mars1024_AI (添加请备注来意)</span>
+              </li>
+              <li>
+                <strong>邮箱</strong>
+                <a href='mailto:contact@mars1024.com'>contact@mars1024.com</a>
+              </li>
+              <li>
+                <strong>合作原则</strong>
+                <span>真诚沟通 · 拒绝画饼 · 按期交付</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section className='section'>
+        <div className='container'>
+          <div className='section-head fade-in'>
+            <p className='section-label'>01 / SERVICES</p>
+            <h2>目前开放的 6 项定制服务。</h2>
+            <p>服务围绕正在真实使用和持续迭代的能力展开，务求解决实际业务痛点。</p>
           </div>
+          <ServiceGrid />
+        </div>
+      </section>
+
+      <section className='section community-section'>
+        <div className='container'>
+          <div className='section-head fade-in'>
+            <p className='section-label'>02 / COMMUNITY</p>
+            <h2>交流群与同行矩阵。</h2>
+            <p>加入免费交流群或探索推荐的高质量同行社群，与 500+ AI 实践者共同进化。</p>
+          </div>
+          <CommunityGrid />
         </div>
       </section>
 

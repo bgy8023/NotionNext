@@ -227,3 +227,7 @@ export const AboutDocument = () => {
         </div>
       </section>
     </>
+  )
+}
+
+export default AboutDocument
