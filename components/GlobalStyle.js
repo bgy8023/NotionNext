@@ -16,7 +16,7 @@ const GlobalStyle = () => {
   }
   return (<style jsx global>{`
 
-    ${GLOBAL_CSS}
+    ${GLOBAL_CSS || ''}
 
   `}</style>)
 }

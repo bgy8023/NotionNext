@@ -1,4 +1,8 @@
 import BLOG, { LAYOUT_MAPPINGS } from '@/blog.config'
+// 默认主题改为静态引入：SSG/SSR 阶段同步可解析，彻底避免 dynamic 导入
+// 在构建竞态下挂起(骨架屏被固化进 HTML)或 chunk 加载失败(整页空白)的问题。
+// 其他主题仍走下方 dynamic 导入，保留 ?theme=xxx 运行时切换能力。
+import * as DefaultThemeModule from '@/themes/yscworks'
 import getConfig from 'next/config'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -105,8 +109,22 @@ const scheduleFixThemeDOM = (delay = 120) => {
   }, delay)
 }
 
+// 默认主题的静态模块表：命中时同步解析，不经过 webpack 懒加载 chunk
+const STATIC_THEME_MODULES = (() => {
+  const map = {}
+  const defaultTheme = normalizeThemeName(BLOG.THEME)
+  if (defaultTheme && DefaultThemeModule) {
+    map[defaultTheme] = DefaultThemeModule
+  }
+  return map
+})()
+
 async function importThemeConfig(themeFolderName) {
   try {
+    const staticMod = STATIC_THEME_MODULES[themeFolderName]
+    if (staticMod) {
+      return getThemeExport(staticMod, 'THEME_CONFIG')
+    }
     const mod = await import(`@/themes/${themeFolderName}`)
     return getThemeExport(mod, 'THEME_CONFIG')
   } catch (err) {
@@ -117,6 +135,14 @@ async function importThemeConfig(themeFolderName) {
 
 async function importThemeLayout(themeFolderName, layoutName) {
   try {
+    const staticMod = STATIC_THEME_MODULES[themeFolderName]
+    if (staticMod) {
+      return (
+        getThemeExport(staticMod, layoutName) ||
+        getThemeExport(staticMod, 'LayoutSlug') ||
+        null
+      )
+    }
     const mod = await import(`@/themes/${themeFolderName}`)
     return (
       getThemeExport(mod, layoutName) ||
@@ -189,10 +215,31 @@ const getCurrentTheme = (router, fallbackTheme) => {
  * @param {*} theme
  * @returns
  */
+// 默认主题的静态布局直取：同步返回组件引用，无 loading、无 chunk 加载，
+// SSG/SSR 渲染结果确定，杜绝预渲染把 loading 骨架固化进 HTML。
+const getDefaultStaticLayout = layoutName => {
+  const defaultThemeName = normalizeThemeName(BLOG.THEME)
+  const mod = STATIC_THEME_MODULES[defaultThemeName]
+  if (!mod) return null
+  const Layout =
+    getThemeExport(mod, layoutName) || getThemeExport(mod, 'LayoutSlug')
+  return typeof Layout === 'function' || typeof Layout === 'object'
+    ? Layout
+    : null
+}
+
 export const getBaseLayoutByTheme = theme => {
   const normalizedTheme = normalizeThemeName(theme)
   if (baseLayoutCache.has(normalizedTheme)) {
     return baseLayoutCache.get(normalizedTheme)
+  }
+  // 默认主题直接使用静态布局，完全绕过 dynamic()
+  const StaticBaseLayout = getDefaultStaticLayout('LayoutBase')
+  if (
+    normalizedTheme === normalizeThemeName(BLOG.THEME) &&
+    StaticBaseLayout
+  ) {
+    return StaticBaseLayout
   }
   const DynamicBaseLayout = dynamic(
     () =>
@@ -223,6 +270,16 @@ export const useLayoutByTheme = ({ layoutName, theme }) => {
   const router = useRouter()
   const themeQuery = getCurrentTheme(router, theme)
   const cacheKey = `${themeQuery}:${layoutName}`
+
+  // 默认主题：同步返回静态布局，跳过 dynamic() 与 loading 骨架
+  if (
+    normalizeThemeName(themeQuery) === normalizeThemeName(BLOG.THEME)
+  ) {
+    const StaticLayout = getDefaultStaticLayout(layoutName)
+    if (StaticLayout) {
+      return StaticLayout
+    }
+  }
 
   if (layoutByThemeCache.has(cacheKey)) {
     scheduleFixThemeDOM(themeQuery === BLOG.THEME ? 80 : 240)

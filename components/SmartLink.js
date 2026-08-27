@@ -34,6 +34,15 @@ const filterLinkProps = props => {
 const SmartLink = ({ href, children, ...rest }) => {
   const LINK = siteConfig('LINK')
 
+  // 防御：href 缺失（undefined/null/空对象）时渲染普通 <a>，
+  // 绝不能把 undefined 传给 next/link，否则 SSR formatUrl(undefined) 会抛
+  // "Cannot destructure property 'auth' of 'a' as it is undefined" 导致整页预渲染失败。
+  if (!href) {
+    return (
+      <a {...filterDOMProps(rest)}>{children}</a>
+    )
+  }
+
   // 获取 URL 字符串用于判断是否是外链
   let urlString = ''
 
