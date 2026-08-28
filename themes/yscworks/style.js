@@ -13,45 +13,75 @@ const Style = () => {
   return (
     <style jsx global>{`
     #theme-yscworks {
-      /* ===== 色彩令牌（对齐参考站计算值） ===== */
-      --bg: #F4EDE2;
+      /* ===== 色彩令牌（对齐 yscai101.com 暖纸主题） ===== */
+      --bg: #f4ede2;
       --bg-soft: rgba(244, 237, 226, 0.82);
-      --text-primary: #1F1915;
-      --text-secondary: #988A7F;
-      --accent: #B84D33;
+      --bg-secondary: #e9dcc8;
+      --bg-card: rgba(250, 246, 240, 0.62);
+      --bg-card-hover: rgba(255, 251, 246, 0.88);
+      --text-primary: #241b15;
+      --text-secondary: #65584d;
+      --text-muted: #918276;
+      --accent: #bb5d37;
+      --accent-light: #d69254;
       --accent-soft: rgb(154, 100, 45);
-      --green: #2D5F56;
-      --green-2: rgb(63, 115, 91);
+      --accent-purple: #566d8a;
+      --accent-pink: #cf7b56;
+      --gradient-accent: linear-gradient(135deg, #b85b35, #e7c37f);
+      --green: #2d5f56;
+      --green-2: #3b7057;
+      --green-3: #315f49;
       --green-light: #EDF4EE;
+      --gold: #e7c37f;
+      --dark-base: #252827;
+      --dark-text: #f7efe7;
       --panel: rgba(255, 251, 246, 0.66);
       --panel-strong: rgba(255, 251, 246, 0.78);
-      --panel-cream: #FAF7EF;
-      --panel-cream-strong: #FBF7F0;
-      --border-card: rgba(78, 46, 29, 0.11);
-      --border-card-hover: rgba(78, 46, 29, 0.22);
+      --panel-cream: rgba(250, 246, 240, 0.62);
+      --panel-cream-strong: rgba(255, 251, 246, 0.88);
+      --border-card: rgba(91, 63, 41, 0.1);
+      --border-card-hover: rgba(91, 63, 41, 0.2);
       --border-cta: rgba(77, 58, 42, 0.12);
-      --border-btn-main: rgba(184, 77, 51, 0.16);
+      --border-btn-main: rgba(184, 91, 53, 0.16);
       --border-btn-sub: rgba(82, 57, 38, 0.12);
       --tag-bg: rgba(255, 255, 255, 0.58);
       --shadow-quick: rgba(31, 27, 24, 0.28) 0 28px 90px;
+      --shadow-card: 0 24px 70px rgba(68, 48, 34, 0.08);
+      --shadow-card-hover: 0 28px 78px rgba(68, 48, 34, 0.12);
+      --shadow-btn: 0 8px 22px rgba(184, 91, 53, 0.16);
+      --shadow-btn-hover: 0 12px 28px rgba(184, 91, 53, 0.18);
+      --glow-color: rgba(231, 189, 96, 0.16);
 
       /* ===== 排版令牌 ===== */
       --font-sans: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+      --font-serif: Georgia, 'Noto Serif SC', 'Songti SC', serif;
+      --font-mono: 'SF Mono', 'Cascadia Code', ui-monospace, Consolas, monospace;
       --fs-body: 16px;
-      --fs-hero: 63.2px;
-      --fs-card-h2: 63.2px;
-      --fs-cta: 78.4px;
-      --fs-nav: 20px;
+      --fs-hero: 6.7rem;
+      --fs-card-h2: 4.4rem;
+      --fs-cta: 4.4rem;
+      --fs-nav: 0.9rem;
       --fs-num: 12px;
       --fs-kicker: 13.44px;
       --fs-quick-title: 32px;
+      --lh-tight: 0.96;
+      --lh-heading: 1.05;
 
       /* ===== 几何令牌 ===== */
       --container: 1200px;
-      --radius-card: 0;
+      --nav-height: 72px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-card: 24px;
+      --radius-hero: 36px;
       --radius-cta: 34px;
       --radius-quick-btn: 6px;
       --radius-quick-panel: 8px;
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+      --transition-slow: 0.5s ease;
     }
 
     /* ===== 基础 ===== */
@@ -121,15 +151,86 @@ const Style = () => {
       letter-spacing: 0.01em;
     }
     #theme-yscworks .yscworks-brand .yscworks-brand-mark {
-      width: 26px;
-      height: 26px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      border: 1.5px solid var(--text-primary);
+      background: var(--gradient-accent);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(58,105,82,0.28), 0 5px 14px rgba(75,53,37,0.1);
+      flex-shrink: 0;
+    }
+    #theme-yscworks .yscworks-brand .yscworks-brand-name {
+      font-family: var(--font-serif);
+      font-weight: 500;
+    }
+    /* 汉堡菜单按钮（移动端） */
+    #theme-yscworks .yscworks-nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+    #theme-yscworks .yscworks-nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    #theme-yscworks .yscworks-nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    #theme-yscworks .yscworks-nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    #theme-yscworks .yscworks-nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    /* 移动端菜单 */
+    #theme-yscworks .yscworks-mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 49;
+      background: rgba(244,237,226,0.98);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: yscworks-menuIn 0.25s ease;
+    }
+    @keyframes yscworks-menuIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #theme-yscworks .yscworks-mobile-menu-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+    }
+    #theme-yscworks .yscworks-mobile-menu-inner a {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 500;
       color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    #theme-yscworks .yscworks-mobile-menu-inner a:hover,
+    #theme-yscworks .yscworks-mobile-menu-inner a.active {
+      color: var(--accent);
+    }
+    @media (max-width: 520px) {
+      #theme-yscworks .yscworks-nav-toggle { display: flex; }
     }
     #theme-yscworks .yscworks-navlinks {
       display: flex;
@@ -139,10 +240,25 @@ const Style = () => {
       padding: 0;
     }
     #theme-yscworks .yscworks-navlinks a {
+      position: relative;
       font-size: var(--fs-nav);
       color: var(--text-primary);
       opacity: 0.86;
       transition: opacity 0.18s ease;
+    }
+    #theme-yscworks .yscworks-navlinks a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    #theme-yscworks .yscworks-navlinks a:hover::after,
+    #theme-yscworks .yscworks-navlinks a.active::after {
+      width: 100%;
     }
     #theme-yscworks .yscworks-navlinks a:hover { opacity: 1; }
     #theme-yscworks .yscworks-navlinks a.active { color: var(--accent); opacity: 1; }
@@ -169,17 +285,18 @@ const Style = () => {
     }
     #theme-yscworks .yscworks-hero .yscworks-kicker { color: var(--accent); }
     #theme-yscworks .yscworks-hero h1 {
-      font-size: clamp(2.6rem, 6vw, var(--fs-hero));
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 7vw, 6.7rem);
+      font-weight: 500;
+      line-height: 0.96;
+      letter-spacing: 0;
       margin: 0 0 22px;
       color: var(--text-primary);
     }
     #theme-yscworks .yscworks-hero p {
-      max-width: 640px;
-      font-size: var(--fs-kicker);
-      line-height: 1.7;
+      max-width: 590px;
+      font-size: 1.08rem;
+      line-height: 1.95;
       color: var(--text-secondary);
       margin: 0;
     }
@@ -192,15 +309,19 @@ const Style = () => {
       padding-bottom: 80px;
     }
     #theme-yscworks .yscworks-case {
-      background: transparent;
+      background: var(--bg-card);
       border: 1px solid var(--border-card);
-      border-radius: var(--radius-card);
+      border-radius: 28px;
       padding: 46px;
       position: relative;
-      transition: border-color 0.18s ease;
+      transition: box-shadow 0.35s ease, background 0.35s ease;
       margin-bottom: 0;
+      box-shadow: var(--shadow-card);
     }
-    #theme-yscworks .yscworks-case:hover { border-color: var(--border-card-hover); }
+    #theme-yscworks .yscworks-case:hover {
+      box-shadow: var(--shadow-card-hover);
+      background: var(--bg-card-hover);
+    }
     #theme-yscworks .yscworks-case .yscworks-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 360px;
@@ -265,12 +386,13 @@ const Style = () => {
       margin: 0 0 14px;
     }
 
-    /* H2 大标题（63.2px/500） */
+    /* H2 大标题（Georgia serif, 大字号, 500） */
     #theme-yscworks .yscworks-title-h2 {
-      font-size: clamp(2.2rem, 4.5vw, var(--fs-card-h2));
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
       font-weight: 500;
       line-height: 1.05;
-      letter-spacing: -0.01em;
+      letter-spacing: 0;
       margin: 0 0 16px;
       color: var(--text-primary);
     }
@@ -306,7 +428,7 @@ const Style = () => {
       background: var(--tag-bg);
       color: var(--text-secondary);
       font-size: 12.5px;
-      border-radius: 0;
+      border-radius: 999px;
       border: 1px solid var(--border-card);
     }
 
@@ -365,7 +487,7 @@ const Style = () => {
 
     /* 右视觉块（绿/浅绿/暖白，无抢戏深色） */
     #theme-yscworks .yscworks-visual {
-      border-radius: var(--radius-card);
+      border-radius: 28px;
       padding: 32px;
       display: flex;
       flex-direction: column;
@@ -423,13 +545,28 @@ const Style = () => {
       color: var(--text-primary);
     }
     #theme-yscworks .yscworks-coop .yscworks-coop-card {
-      background: var(--panel-strong);
+      background: var(--panel-cream-strong);
       border: 1px solid var(--border-cta);
       border-radius: var(--radius-cta);
       padding: 48px 48px 48px 70px;
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-card);
     }
+    #theme-yscworks .yscworks-coop .yscworks-coop-card::after {
+      content: 'AVAILABLE';
+      position: absolute;
+      bottom: -20px;
+      right: 30px;
+      font-size: clamp(6rem, 12vw, 11rem);
+      font-weight: 800;
+      color: rgba(184,91,53,0.06);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #theme-yscworks .yscworks-coop .yscworks-coop-card > * { position: relative; z-index: 1; }
     @media (max-width: 720px) {
       #theme-yscworks .yscworks-coop .yscworks-coop-card {
         padding: 36px 28px 36px 36px;
@@ -446,10 +583,11 @@ const Style = () => {
       opacity: 1;
     }
     #theme-yscworks .yscworks-coop h2 {
+      font-family: var(--font-serif);
       font-size: clamp(2rem, 5vw, var(--fs-cta));
       font-weight: 500;
       line-height: 1.04;
-      letter-spacing: -0.01em;
+      letter-spacing: 0;
       color: var(--text-primary);
       margin: 14px 0 18px;
       max-width: 820px;
@@ -472,10 +610,15 @@ const Style = () => {
     #theme-yscworks .yscworks-coop .yscworks-coop-row a {
       font-size: 14px;
       color: var(--text-primary);
-      border-bottom: 1px solid var(--border-card);
-      padding-bottom: 2px;
+      border: 1px solid var(--border-card);
+      border-radius: 999px;
+      padding: 8px 18px;
+      transition: border-color 0.18s ease, color 0.18s ease;
     }
-    #theme-yscworks .yscworks-coop .yscworks-coop-row a:hover { border-color: var(--accent); color: var(--accent); }
+    #theme-yscworks .yscworks-coop .yscworks-coop-row a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
     #theme-yscworks .yscworks-coop .yscworks-coop-status {
       display: inline-flex;
       align-items: center;
@@ -716,10 +859,11 @@ const Style = () => {
       max-width: 640px;
     }
     #theme-yscworks .yscworks-lab-section-head h2 {
-      font-size: clamp(1.9rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: 0;
       margin: 0 0 14px;
       color: var(--text-primary);
     }
@@ -799,17 +943,62 @@ const Style = () => {
 
     /* ===== 2. Hero（lab-hero + console） ===== */
     #theme-yscworks .yscworks-lab-hero {
-      padding: 88px 0 72px;
+      padding: calc(var(--nav-height) + 46px) 0 52px;
       position: relative;
     }
     #theme-yscworks .yscworks-lab-hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-      gap: 56px;
-      align-items: center;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 28px;
+      align-items: stretch;
     }
-    @media (max-width: 900px) {
-      #theme-yscworks .yscworks-lab-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    @media (max-width: 1100px) {
+      #theme-yscworks .yscworks-lab-hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+    #theme-yscworks .yscworks-lab-hero-copy {
+      min-height: 620px;
+      padding: clamp(32px, 5vw, 58px);
+      border-radius: var(--radius-hero);
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    #theme-yscworks .yscworks-lab-hero-copy::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(242,199,122,0.28), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: yscworks-labFloat 9s ease-in-out infinite;
+    }
+    #theme-yscworks .yscworks-lab-hero-copy::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(86,109,138,0.12), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: yscworks-labFloat 11s ease-in-out infinite reverse;
+    }
+    @keyframes yscworks-labFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(22px) scale(1.05); }
+    }
+    #theme-yscworks .yscworks-lab-hero-copy > * { position: relative; z-index: 1; }
+    @media (max-width: 1100px) {
+      #theme-yscworks .yscworks-lab-hero-copy { min-height: auto; }
     }
     #theme-yscworks .yscworks-lab-kicker {
       display: inline-flex;
@@ -827,24 +1016,27 @@ const Style = () => {
       height: 9px;
       border-radius: 50%;
       background: var(--green);
-      animation: yscworks-pulse 2s infinite;
+      box-shadow: 0 0 0 0 rgba(45, 95, 86, 0.4);
+      animation: yscworks-labPulse 1.7s ease-out infinite;
     }
-    @keyframes yscworks-pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.35; }
+    @keyframes yscworks-labPulse {
+      0% { box-shadow: 0 0 0 0 rgba(45, 95, 86, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(45, 95, 86, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(45, 95, 86, 0); }
     }
     #theme-yscworks .yscworks-lab-hero-copy h1 {
-      font-size: clamp(2.4rem, 5.5vw, var(--fs-hero));
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.01em;
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 7vw, 6.7rem);
+      font-weight: 500;
+      line-height: 0.96;
+      letter-spacing: 0;
       margin: 0 0 22px;
       color: var(--text-primary);
     }
     #theme-yscworks .yscworks-lab-lead {
       max-width: 560px;
-      font-size: 15.5px;
-      line-height: 1.75;
+      font-size: 1.08rem;
+      line-height: 1.95;
       color: var(--text-secondary);
       margin: 0 0 26px;
     }
@@ -863,22 +1055,41 @@ const Style = () => {
       padding: 6px 14px;
     }
 
-    /* console 卡 */
+    /* console 卡 — 深色终端风 */
     #theme-yscworks .yscworks-lab-console {
-      background: var(--panel-cream);
-      border: 1px solid var(--border-card);
-      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(33,30,28,0.97), rgba(28,25,23,0.97));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-hero);
       padding: 0;
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(31, 25, 21, 0.08);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+    }
+    #theme-yscworks .yscworks-lab-console::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #theme-yscworks .yscworks-lab-console > * { position: relative; z-index: 1; }
+    @media (max-width: 1100px) {
+      #theme-yscworks .yscworks-lab-console { min-height: auto; }
     }
     #theme-yscworks .yscworks-console-topbar {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 12px 16px;
-      background: rgba(31, 25, 21, 0.04);
-      border-bottom: 1px solid var(--border-card);
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     #theme-yscworks .yscworks-console-topbar span {
       width: 11px;
@@ -893,8 +1104,8 @@ const Style = () => {
       margin-left: auto;
       font-size: 12.5px;
       font-weight: 600;
-      color: var(--text-secondary);
-      font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+      color: rgba(247,239,231,0.5);
+      font-family: var(--font-mono);
     }
     #theme-yscworks .yscworks-console-profile {
       display: flex;
@@ -919,12 +1130,12 @@ const Style = () => {
       margin: 0 0 3px;
       font-size: 16px;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--dark-text);
     }
     #theme-yscworks .yscworks-console-profile strong {
       font-size: 12.5px;
       font-weight: 400;
-      color: var(--text-secondary);
+      color: rgba(247,239,231,0.6);
       line-height: 1.4;
     }
     #theme-yscworks .yscworks-console-lines {
@@ -935,22 +1146,22 @@ const Style = () => {
     }
     #theme-yscworks .yscworks-console-lines p {
       margin: 0;
-      font-size: 13.5px;
-      color: var(--text-primary);
-      font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+      font-size: 0.82rem;
+      color: rgba(247,239,231,0.85);
+      font-family: var(--font-mono);
     }
     #theme-yscworks .yscworks-console-lines p span {
       display: inline-block;
       min-width: 64px;
-      color: var(--accent);
+      color: var(--gold);
       font-weight: 600;
     }
     #theme-yscworks .yscworks-console-build {
       margin: 0 20px 14px;
       padding: 14px 16px;
-      border: 1px solid var(--border-card);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 10px;
-      background: var(--panel);
+      background: rgba(255,255,255,0.03);
     }
     #theme-yscworks .yscworks-console-build > div:first-child {
       display: flex;
@@ -963,12 +1174,12 @@ const Style = () => {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
-      color: var(--text-secondary);
+      color: rgba(247,239,231,0.5);
       text-transform: uppercase;
     }
     #theme-yscworks .yscworks-console-build strong {
       font-size: 13.5px;
-      color: var(--text-primary);
+      color: var(--dark-text);
     }
     #theme-yscworks .yscworks-console-progress {
       height: 6px;
@@ -992,11 +1203,11 @@ const Style = () => {
     }
     #theme-yscworks .yscworks-console-build small {
       font-size: 11.5px;
-      color: var(--text-secondary);
+      color: rgba(247,239,231,0.5);
     }
     #theme-yscworks .yscworks-console-manifesto {
       padding: 18px 20px 22px;
-      border-top: 1px solid var(--border-card);
+      border-top: 1px solid rgba(255,255,255,0.08);
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -1005,27 +1216,42 @@ const Style = () => {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
-      color: var(--text-secondary);
+      color: rgba(247,239,231,0.5);
       text-transform: uppercase;
     }
     #theme-yscworks .yscworks-console-manifesto strong {
       font-size: 18px;
       font-weight: 700;
       line-height: 1.35;
-      color: var(--text-primary);
+      color: var(--dark-text);
       white-space: pre-line;
     }
     #theme-yscworks .yscworks-console-manifesto small {
       font-size: 12px;
-      color: var(--text-secondary);
-      font-family: ui-monospace, Consolas, monospace;
+      color: rgba(247,239,231,0.5);
+      font-family: var(--font-mono);
     }
 
-    /* ===== 3. HOW I CAN HELP ===== */
+    /* ===== 3. HOW I CAN HELP — 绿色点状纹理 + border 网格 ===== */
     #theme-yscworks .yscworks-help-section {
-      padding: 72px 0;
+      padding: 82px 0 54px;
       border-top: 1px solid var(--border-card);
+      position: relative;
+      background:
+        radial-gradient(circle, rgba(59,112,87,0.07) 1px, transparent 1.5px) 0 0 / 20px 20px,
+        linear-gradient(180deg, rgba(45,95,86,0.015), transparent 60%);
     }
+    #theme-yscworks .yscworks-help-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      background: radial-gradient(circle at 80% 20%, rgba(59,112,87,0.06), transparent 60%);
+      pointer-events: none;
+    }
+    #theme-yscworks .yscworks-help-section > * { position: relative; }
     #theme-yscworks .yscworks-help-head {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
@@ -1035,9 +1261,10 @@ const Style = () => {
     }
     @media (max-width: 860px) { #theme-yscworks .yscworks-help-head { grid-template-columns: 1fr; gap: 20px; } }
     #theme-yscworks .yscworks-help-head h2 {
-      font-size: clamp(1.9rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.15;
+      font-family: var(--font-serif);
+      font-size: clamp(2.7rem, 3.8vw, 3.35rem);
+      font-weight: 500;
+      line-height: 1.08;
       margin: 0;
       color: var(--text-primary);
       white-space: pre-line;
@@ -1052,32 +1279,44 @@ const Style = () => {
     #theme-yscworks .yscworks-help-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-    }
-    @media (max-width: 960px) { #theme-yscworks .yscworks-help-grid { grid-template-columns: 1fr; } }
-    #theme-yscworks .yscworks-help-card {
-      background: var(--panel);
+      gap: 0;
       border: 1px solid var(--border-card);
-      border-radius: 16px;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    @media (max-width: 900px) { #theme-yscworks .yscworks-help-grid { grid-template-columns: 1fr; } }
+    #theme-yscworks .yscworks-help-card {
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--border-card);
+      border-radius: 0;
       padding: 32px 30px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      transition: border-color 0.18s ease, transform 0.18s ease;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    #theme-yscworks .yscworks-help-card:last-child { border-right: none; }
+    @media (max-width: 900px) {
+      #theme-yscworks .yscworks-help-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border-card);
+      }
+      #theme-yscworks .yscworks-help-card:last-child { border-bottom: none; }
     }
     #theme-yscworks .yscworks-help-card:hover {
-      border-color: var(--border-card-hover);
-      transform: translateY(-3px);
+      background: rgba(59,112,87,0.04);
     }
     #theme-yscworks .yscworks-help-index {
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.1em;
-      color: var(--accent);
+      color: var(--green-2);
     }
     #theme-yscworks .yscworks-help-card h3 {
-      font-size: 21px;
-      font-weight: 700;
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 500;
       margin: 0;
       color: var(--text-primary);
     }
@@ -1089,8 +1328,8 @@ const Style = () => {
     }
     #theme-yscworks .yscworks-help-situation b { color: var(--text-primary); font-weight: 600; }
     #theme-yscworks .yscworks-help-delivery {
-      border-top: 1px dashed var(--border-card);
-      padding-top: 12px;
+      border-left: 3px solid var(--green-2);
+      padding: 4px 0 4px 14px;
     }
     #theme-yscworks .yscworks-help-delivery span,
     #theme-yscworks .yscworks-help-proof span {
@@ -1110,7 +1349,7 @@ const Style = () => {
     }
     #theme-yscworks .yscworks-help-proof strong {
       font-size: 14px;
-      color: var(--green);
+      color: var(--green-2);
       font-weight: 600;
     }
     #theme-yscworks .yscworks-help-card > a {
@@ -1123,15 +1362,24 @@ const Style = () => {
     #theme-yscworks .yscworks-help-card > a:hover { text-decoration: underline; }
     #theme-yscworks .yscworks-help-next {
       margin-top: 36px;
-      padding: 22px 26px;
-      background: var(--panel-cream);
-      border: 1px solid var(--border-card);
-      border-radius: 12px;
+      padding: 18px 28px;
+      background: transparent;
+      border: 2px solid var(--green-2);
+      border-radius: 999px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
       flex-wrap: wrap;
+      transition: background 0.25s ease;
+    }
+    #theme-yscworks .yscworks-help-next:hover {
+      background: var(--green-2);
+    }
+    #theme-yscworks .yscworks-help-next:hover p,
+    #theme-yscworks .yscworks-help-next:hover p span,
+    #theme-yscworks .yscworks-help-next:hover a {
+      color: #fff;
     }
     #theme-yscworks .yscworks-help-next p {
       margin: 0;
@@ -1144,7 +1392,7 @@ const Style = () => {
       margin-right: 10px;
     }
     #theme-yscworks .yscworks-help-next a {
-      color: var(--accent);
+      color: var(--green-2);
       font-weight: 600;
       font-size: 14.5px;
       text-decoration: none;
@@ -1152,29 +1400,40 @@ const Style = () => {
     }
     #theme-yscworks .yscworks-help-next a:hover { text-decoration: underline; }
 
-    /* ===== 4. 实践数据 ===== */
+    /* ===== 4. 实践数据 — 独立卡片 ===== */
     #theme-yscworks .yscworks-lab-stats {
-      padding: 0 0 72px;
+      padding: 22px 0 44px;
     }
     #theme-yscworks .yscworks-lab-stat-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-      border-top: 1px solid var(--border-card);
-      border-bottom: 1px solid var(--border-card);
-      padding: 36px 0;
+      gap: 20px;
+      border: none;
+      padding: 0;
     }
-    @media (max-width: 760px) { #theme-yscworks .yscworks-lab-stat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1100px) { #theme-yscworks .yscworks-lab-stat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px) { #theme-yscworks .yscworks-lab-stat-grid { grid-template-columns: 1fr; } }
     #theme-yscworks .yscworks-lab-stat-grid article {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
+      padding: 24px 28px;
+      min-height: 132px;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      background: var(--bg-card);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    #theme-yscworks .yscworks-lab-stat-grid article:hover {
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow-card);
     }
     #theme-yscworks .yscworks-lab-stat-grid strong {
-      font-size: 32px;
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       color: var(--text-primary);
       letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
     }
     #theme-yscworks .yscworks-lab-stat-grid span {
       font-size: 13.5px;
@@ -1187,33 +1446,57 @@ const Style = () => {
     }
     #theme-yscworks .yscworks-route-heading {
       margin-bottom: 32px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
     }
     #theme-yscworks .yscworks-route-heading h2 {
-      font-size: clamp(1.9rem, 4vw, 2.6rem);
-      font-weight: 700;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 500;
       margin: 0;
       color: var(--text-primary);
     }
     #theme-yscworks .yscworks-route-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      gap: 0;
+      border: 1px solid var(--border-card);
+      border-radius: 0;
+      overflow: hidden;
     }
     @media (max-width: 760px) { #theme-yscworks .yscworks-route-grid { grid-template-columns: 1fr; } }
     #theme-yscworks .yscworks-route-card {
       display: flex;
       align-items: center;
       gap: 18px;
-      padding: 22px 24px;
-      border: 1px solid var(--border-card);
-      border-radius: 14px;
-      background: var(--panel);
+      padding: 28px 24px;
+      border: none;
+      border-right: 1px solid var(--border-card);
+      border-bottom: 1px solid var(--border-card);
+      border-radius: 0;
+      background: transparent;
       text-decoration: none;
-      transition: border-color 0.18s ease, transform 0.18s ease;
+      transition: background 0.3s ease, color 0.3s ease;
+      color: var(--text-primary);
+    }
+    #theme-yscworks .yscworks-route-card:nth-child(2n) { border-right: none; }
+    #theme-yscworks .yscworks-route-card:nth-last-child(-n+2) { border-bottom: none; }
+    @media (max-width: 760px) {
+      #theme-yscworks .yscworks-route-card { border-right: none; }
+      #theme-yscworks .yscworks-route-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--border-card); }
+      #theme-yscworks .yscworks-route-card:last-child { border-bottom: none; }
     }
     #theme-yscworks .yscworks-route-card:hover {
-      border-color: var(--border-card-hover);
-      transform: translateY(-2px);
+      background: var(--dark-base);
+      color: var(--dark-text);
+    }
+    #theme-yscworks .yscworks-route-card:hover > span,
+    #theme-yscworks .yscworks-route-card:hover strong,
+    #theme-yscworks .yscworks-route-card:hover small,
+    #theme-yscworks .yscworks-route-card:hover i {
+      color: var(--dark-text);
     }
     #theme-yscworks .yscworks-route-card > span {
       font-size: 12px;
@@ -1246,7 +1529,7 @@ const Style = () => {
 
     /* ===== 6. WHAT I DO ===== */
     #theme-yscworks .yscworks-lab-map {
-      padding: 72px 0;
+      padding: 100px 0;
       border-top: 1px solid var(--border-card);
     }
     #theme-yscworks .yscworks-lab-map-grid {
@@ -1260,13 +1543,19 @@ const Style = () => {
     #theme-yscworks .yscworks-lab-map-card {
       padding: 30px 28px;
       border: 1px solid var(--border-card);
-      border-radius: 14px;
-      background: transparent;
+      border-radius: 28px;
+      background: var(--bg-card);
       display: flex;
       flex-direction: column;
       gap: 12px;
+      min-height: 300px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
-    #theme-yscworks .yscworks-lab-map-card:hover { border-color: var(--border-card-hover); }
+    #theme-yscworks .yscworks-lab-map-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
     #theme-yscworks .yscworks-lab-map-card > span {
       font-size: 12px;
       font-weight: 600;
@@ -1274,8 +1563,9 @@ const Style = () => {
       color: var(--accent);
     }
     #theme-yscworks .yscworks-lab-map-card h3 {
-      font-size: 21px;
-      font-weight: 700;
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 500;
       margin: 0;
       color: var(--text-primary);
     }
@@ -1296,7 +1586,7 @@ const Style = () => {
 
     /* ===== 7. CURRENT PRODUCTS（产品矩阵，复用 yscworks-case） ===== */
     #theme-yscworks .yscworks-lab-projects {
-      padding: 72px 0;
+      padding: 100px 0;
       border-top: 1px solid var(--border-card);
     }
     #theme-yscworks .yscworks-lab-project-grid {
@@ -1315,7 +1605,7 @@ const Style = () => {
 
     /* ===== 8. RECENTLY SHIPPING ===== */
     #theme-yscworks .yscworks-lab-updates {
-      padding: 72px 0;
+      padding: 100px 0;
       border-top: 1px solid var(--border-card);
     }
     #theme-yscworks .yscworks-lab-updates-grid {
@@ -1328,18 +1618,23 @@ const Style = () => {
     #theme-yscworks .yscworks-update-list {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 0;
+      border: 1px solid var(--border-card);
+      border-radius: 0;
+      overflow: hidden;
     }
     #theme-yscworks .yscworks-update-list a {
-      display: flex;
-      align-items: baseline;
+      display: grid;
+      grid-template-columns: 142px minmax(0, 1fr) auto;
+      align-items: center;
       gap: 18px;
-      padding: 16px 6px;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--border-card);
       text-decoration: none;
-      transition: background 0.15s ease;
+      transition: background 0.25s ease;
     }
-    #theme-yscworks .yscworks-update-list a:hover { background: var(--panel); }
+    #theme-yscworks .yscworks-update-list a:last-child { border-bottom: none; }
+    #theme-yscworks .yscworks-update-list a:hover { background: var(--bg-card); }
     #theme-yscworks .yscworks-update-list span {
       font-size: 11.5px;
       font-weight: 600;
@@ -1364,7 +1659,7 @@ const Style = () => {
 
     /* ===== 9. FREE COMMUNITY ===== */
     #theme-yscworks .yscworks-lab-resource {
-      padding: 72px 0;
+      padding: 100px 0;
       border-top: 1px solid var(--border-card);
     }
     #theme-yscworks .yscworks-lab-resource-grid {
@@ -1377,20 +1672,24 @@ const Style = () => {
     #theme-yscworks .yscworks-resource-links {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 0;
+      border: 1px solid var(--border-card);
+      border-radius: 0;
+      overflow: hidden;
     }
     #theme-yscworks .yscworks-resource-links a {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
       padding: 20px 24px;
-      border: 1px solid var(--border-card);
-      border-radius: 12px;
-      background: var(--panel);
+      border-bottom: 1px solid var(--border-card);
+      background: transparent;
       text-decoration: none;
-      transition: border-color 0.18s ease;
+      transition: background 0.25s ease;
     }
-    #theme-yscworks .yscworks-resource-links a:hover { border-color: var(--border-card-hover); }
+    #theme-yscworks .yscworks-resource-links a:last-child { border-bottom: none; }
+    #theme-yscworks .yscworks-resource-links a:hover { background: var(--bg-card); }
     #theme-yscworks .yscworks-resource-links span {
       font-size: 11.5px;
       font-weight: 600;
@@ -1411,7 +1710,7 @@ const Style = () => {
 
     /* ===== 10. 写作区块 ===== */
     #theme-yscworks .yscworks-lab-writing {
-      padding: 72px 0;
+      padding: 100px 0;
       border-top: 1px solid var(--border-card);
     }
     #theme-yscworks .yscworks-lab-writing-grid {
@@ -1422,37 +1721,49 @@ const Style = () => {
     }
     @media (max-width: 860px) { #theme-yscworks .yscworks-lab-writing-grid { grid-template-columns: 1fr; gap: 32px; } }
     #theme-yscworks .yscworks-lab-note-list {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      display: grid;
+      gap: 12px;
     }
     #theme-yscworks .yscworks-lab-note-list a {
-      display: flex;
-      align-items: baseline;
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: center;
       gap: 18px;
-      padding: 16px 6px;
-      border-bottom: 1px solid var(--border-card);
+      padding: 16px 20px;
+      border: 1px solid var(--border-card);
+      border-radius: 22px;
+      background: var(--bg-card);
       text-decoration: none;
-      transition: background 0.15s ease;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
     }
-    #theme-yscworks .yscworks-lab-note-list a:hover { background: var(--panel); }
+    #theme-yscworks .yscworks-lab-note-list a:hover {
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow-card);
+    }
     #theme-yscworks .yscworks-lab-note-list span {
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 0.76rem;
+      font-weight: 800;
       color: var(--accent);
-      font-family: ui-monospace, Consolas, monospace;
+      font-family: var(--font-mono);
     }
     #theme-yscworks .yscworks-lab-note-list strong {
-      flex: 1;
-      font-size: 15.5px;
-      font-weight: 600;
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 500;
       color: var(--text-primary);
+      line-height: 1.3;
     }
     #theme-yscworks .yscworks-lab-note-list em {
       font-style: normal;
       font-size: 13px;
       color: var(--text-secondary);
       white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      #theme-yscworks .yscworks-lab-note-list a {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
     }
 
     /* ================================================================
@@ -1593,9 +1904,10 @@ const Style = () => {
       min-width: 0;
     }
     #theme-yscworks .mag-article-title {
+      font-family: var(--font-serif);
       font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-      font-weight: 700;
-      line-height: 1.35;
+      font-weight: 500;
+      line-height: 1.3;
       margin: 0 0 10px;
       color: var(--text-primary);
     }
@@ -1666,8 +1978,9 @@ const Style = () => {
       flex: 1;
     }
     #theme-yscworks .mag-category-info h3 {
+      font-family: var(--font-serif);
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 500;
       margin: 0 0 4px;
       color: var(--text-primary);
     }
