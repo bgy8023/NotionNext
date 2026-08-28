@@ -10,7 +10,7 @@ export const PostMeta = props => {
   const { locale } = useGlobal()
 
   return (
-    <section className='flex-wrap flex mt-2 text-gray-400 dark:text-gray-400 font-light leading-8'>
+    <section className='flex-wrap flex mt-3 text-[#988A7F] text-xs font-mono leading-7'>
       <div>
         {post?.type !== 'Page' && (
           <>

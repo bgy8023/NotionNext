@@ -1558,3 +1558,132 @@ const Style = () => {
 }
 
 export { Style }
+
+/* ===== 杂志风文章列表 ===== */
+#theme-yscworks .mag-article {
+  display: grid;
+  grid-template-columns: minmax(0, 40px) 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-card);
+  align-items: start;
+}
+#theme-yscworks .mag-article:first-child { border-top: 1px solid var(--border-card); }
+#theme-yscworks .mag-article-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+}
+#theme-yscworks .mag-article-num {
+  font-size: var(--fs-num);
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+}
+#theme-yscworks .mag-article-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+#theme-yscworks .mag-article-category {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+#theme-yscworks .mag-article-title {
+  grid-column: 2;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+}
+#theme-yscworks .mag-article-title a { color: inherit; text-decoration: none; }
+#theme-yscworks .mag-article-title a:hover { color: var(--accent); }
+#theme-yscworks .mag-article-summary {
+  grid-column: 2;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  #theme-yscworks .mag-article {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  #theme-yscworks .mag-article-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* ===== 杂志风分类网格 ===== */
+#theme-yscworks .mag-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 24px 0 60px;
+}
+#theme-yscworks .mag-category-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 28px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  background: var(--panel);
+  transition: all .18s ease;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+#theme-yscworks .mag-category-card:hover {
+  border-color: var(--accent);
+  background: var(--panel-strong);
+  transform: translateY(-2px);
+}
+#theme-yscworks .mag-category-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(184, 77, 51, 0.08);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+#theme-yscworks .mag-category-info {
+  flex: 1;
+}
+#theme-yscworks .mag-category-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--text-primary);
+}
+#theme-yscworks .mag-category-info p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+#theme-yscworks .mag-category-arrow {
+  color: var(--text-secondary);
+  font-size: 14px;
+  transition: transform .18s ease, color .18s ease;
+}
+#theme-yscworks .mag-category-card:hover .mag-category-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+

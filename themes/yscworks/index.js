@@ -140,29 +140,36 @@ const LayoutIndex = props => {
 }
 
 /**
- * 文章列表页（博客/分类/标签）
+ * 文章列表页 —— 杂志风文章流 (对齐 yscai101.com/blog.html)
  */
 const LayoutPostList = props => {
   const { category, tag } = props
+  const title = category || (tag ? `#${tag}` : 'PUBLIC NOTES')
+  const kicker = category ? 'CATEGORY' : (tag ? 'TAG' : 'WRITING')
+  const summary = category
+    ? `收录在「${category}」分类下的所有公开记录与实践文章。`
+    : (tag ? `标记为「#${tag}」的所有文章。` : '把真实的过程写下来，只收录已经存在的文章。')
 
   return (
-    <div className='container mx-auto py-12'>
-      {/* 显示分类 */}
-      {category && (
-        <div className='pb-8 text-2xl font-bold'>
-          <i className='mr-2 fas fa-folder-open text-[#B84D33]' />
-          {category}
+    <>
+      <section className='page-intro'>
+        <div className='container page-intro-single'>
+          <p className='page-kicker'>{kicker}</p>
+          <h1>{title}</h1>
+          <p className='page-summary'>{summary}</p>
         </div>
-      )}
-      {/* 显示标签 */}
-      {tag && <div className='pb-8 text-2xl font-bold'>#{tag}</div>}
+      </section>
 
-      {siteConfig('POST_LIST_STYLE') === 'page' ? (
-        <BlogListPage {...props} />
-      ) : (
-        <BlogListScroll {...props} />
-      )}
-    </div>
+      <section className='section'>
+        <div className='container'>
+          {siteConfig('POST_LIST_STYLE') === 'page' ? (
+            <BlogListPage {...props} />
+          ) : (
+            <BlogListScroll {...props} />
+          )}
+        </div>
+      </section>
+    </>
   )
 }
 
@@ -279,22 +286,42 @@ const LayoutArchive = props => {
 }
 
 /**
- * 分类列表
+ * 分类列表 —— 杂志风分类索引页
  */
 const LayoutCategoryIndex = props => {
   const { categoryOptions } = props
   return (
     <div className='container mx-auto py-12'>
-      <div id='category-list' className='flex flex-wrap gap-4'>
-        {categoryOptions?.map(category => (
-          <SmartLink
-            key={category.name}
-            href={`/category/${category.name}`}
-            className='px-6 py-3 rounded-lg border border-[rgba(78,46,29,0.15)] bg-[rgba(255,251,246,0.6)] hover:border-[#B84D33] hover:text-[#B84D33] transition-all'>
-            <i className='mr-2 fas fa-folder' />
-            {category.name} ({category.count})
-          </SmartLink>
-        ))}
+      {/* 页面引言 */}
+      <section className='page-intro'>
+        <div className='container page-intro-single'>
+          <p className='page-kicker'>CATEGORY</p>
+          <h1>分类目录</h1>
+          <p className='page-summary'>
+            按主题整理的所有文章，挑感兴趣的开始读。
+          </p>
+        </div>
+      </section>
+
+      {/* 分类卡片网格 */}
+      <div className='container'>
+        <div className='mag-category-grid'>
+          {categoryOptions?.map(category => (
+            <SmartLink
+              key={category.name}
+              href={`/category/${category.name}`}
+              className='mag-category-card'>
+              <div className='mag-category-icon'>
+                <i className='fas fa-folder' />
+              </div>
+              <div className='mag-category-info'>
+                <h3>{category.name}</h3>
+                <p>{category.count} 篇文章</p>
+              </div>
+              <i className='fas fa-chevron-right mag-category-arrow' />
+            </SmartLink>
+          ))}
+        </div>
       </div>
     </div>
   )

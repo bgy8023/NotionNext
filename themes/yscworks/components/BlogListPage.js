@@ -2,61 +2,69 @@ import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
-import CONFIG from '../config'
-import BlogItem from './BlogItem'
+import MagBlogItem from './MagBlogItem'
+
 /**
- * 使用分页插件的博客列表
- * @param {*} props
- * @returns
+ * 杂志风博客列表 —— 分页版
+ * 严格对齐 yscai101.com/blog.html 编辑风
  */
 export const BlogListPage = props => {
-  const { page = 1, posts, postCount } = props
+  const { page = 1, posts = [], postCount } = props
   const { locale, NOTION_CONFIG } = useGlobal()
   const router = useRouter()
-  const totalPage = Math.ceil(
-    postCount / siteConfig('POSTS_PER_PAGE', null, NOTION_CONFIG)
-  )
+  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', 12, NOTION_CONFIG)
+  const totalPage = Math.ceil((postCount || posts.length) / POSTS_PER_PAGE)
   const currentPage = +page
 
   const showPrev = currentPage > 1
-  const showNext = page < totalPage
+  const showNext = currentPage < totalPage
   const pagePrefix = router.asPath
     .split('?')[0]
     .replace(/\/page\/[1-9]\d*/, '')
     .replace(/\/$/, '')
     .replace('.html', '')
 
-  const showPageCover = siteConfig('EXAMPLE_POST_LIST_COVER', null, CONFIG)
-
   return (
-    <div className={`w-full ${showPageCover ? 'md:pr-2' : 'md:pr-12'} mb-12`}>
-      <div id='posts-wrapper'>
-        {posts?.map((post, i) => (
-          <BlogItem key={post.id} post={post} index={i} geo={i === 0} />
+    <div className='w-full'>
+      <div className='mag-article-list' id='posts-wrapper'>
+        {posts.map((post, i) => (
+          <MagBlogItem key={post.id || i} post={post} index={(currentPage - 1) * POSTS_PER_PAGE + i} />
         ))}
+        {posts.length === 0 && (
+          <div className='py-16 text-center text-[#988A7F]'>
+            <p>暂无相关文章</p>
+          </div>
+        )}
       </div>
 
-      <div className='flex justify-between text-xs'>
-        <SmartLink
-          href={{
-            pathname:
-              currentPage - 1 === 1
-                ? `${pagePrefix}/`
-                : `${pagePrefix}/page/${currentPage - 1}`,
-            query: router.query.s ? { s: router.query.s } : {}
-          }}
-          className={`${showPrev ? 'bg-black dark:bg-hexo-black-gray' : 'bg-gray pointer-events-none invisible'} text-white no-underline py-2 px-3 rounded`}>
-          {locale.PAGINATION.PREV}
-        </SmartLink>
-        <SmartLink
-          href={{
-            pathname: `${pagePrefix}/page/${currentPage + 1}`,
-            query: router.query.s ? { s: router.query.s } : {}
-          }}
-          className={`${showNext ? 'bg-black dark:bg-hexo-black-gray ' : 'bg-gray pointer-events-none invisible'} text-white no-underline py-2 px-3 rounded`}>
-          {locale.PAGINATION.NEXT}
-        </SmartLink>
-      </div>
+      {totalPage > 1 && (
+        <div className='flex justify-between items-center py-8 mt-8 border-t border-[rgba(78,46,29,0.11)] text-sm'>
+          <SmartLink
+            href={{
+              pathname:
+                currentPage - 1 === 1
+                  ? `${pagePrefix}/`
+                  : `${pagePrefix}/page/${currentPage - 1}`,
+              query: router.query.s ? { s: router.query.s } : {}
+            }}
+            className={`${showPrev ? 'text-[#1F1915] hover:text-[#B84D33] font-semibold' : 'opacity-0 pointer-events-none'} transition-colors`}>
+            ← {locale?.PAGINATION?.PREV || '上一页'}
+          </SmartLink>
+          <span className='text-xs text-[#988A7F] font-mono'>
+            {currentPage} / {totalPage}
+          </span>
+          <SmartLink
+            href={{
+              pathname: `${pagePrefix}/page/${currentPage + 1}`,
+              query: router.query.s ? { s: router.query.s } : {}
+            }}
+            className={`${showNext ? 'text-[#1F1915] hover:text-[#B84D33] font-semibold' : 'opacity-0 pointer-events-none'} transition-colors`}>
+            {locale?.PAGINATION?.NEXT || '下一页'} →
+          </SmartLink>
+        </div>
+      )}
     </div>
   )
 }
+
+export default BlogListPage

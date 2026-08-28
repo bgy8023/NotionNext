@@ -22,7 +22,7 @@ export default function TitleBar(props) {
     <>
       {/* 标题栏 */}
       {!fullWidth && (
-        <div className='relative overflow-hidden text-center px-6 py-12 mb-6 bg-gray-100 dark:bg-hexo-black-gray dark:border-hexo-black-gray border-b'>
+        <div className='relative overflow-hidden text-center px-6 py-16 mb-8 border-b border-[rgba(78,46,29,0.11)]' style={{ background: 'linear-gradient(180deg, rgba(255,250,239,0.8), rgba(244,237,226,0))' }}>
           <h1 className='title-1 relative text-xl md:text-4xl pb-4 z-10'>
             {siteConfig('POST_TITLE_ICON') && (
               <NotionIcon icon={post?.pageIcon} />
