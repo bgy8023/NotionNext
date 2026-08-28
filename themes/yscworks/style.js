@@ -1553,12 +1553,12 @@ const Style = () => {
     ${PORT_STYLES}
 
 
-    /* ===== 杂志风文章列表 ===== */
+    /* ===== 杂志风文章列表 (编辑风排版) ===== */
     #theme-yscworks .mag-article {
       display: grid;
-      grid-template-columns: minmax(0, 40px) 1fr;
-      gap: 16px;
-      padding: 20px 0;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 32px;
+      padding: 28px 0;
       border-bottom: 1px solid var(--border-card);
       align-items: start;
     }
@@ -1566,7 +1566,7 @@ const Style = () => {
     #theme-yscworks .mag-article-meta {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
       padding-top: 4px;
     }
     #theme-yscworks .mag-article-num {
@@ -1575,10 +1575,12 @@ const Style = () => {
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: .14em;
+      font-family: ui-monospace, Consolas, monospace;
     }
     #theme-yscworks .mag-article-date {
       font-size: 12px;
       color: var(--text-secondary);
+      font-family: ui-monospace, Consolas, monospace;
     }
     #theme-yscworks .mag-article-category {
       font-size: 11px;
@@ -1587,18 +1589,19 @@ const Style = () => {
       color: var(--accent);
       text-transform: uppercase;
     }
+    #theme-yscworks .mag-article-content {
+      min-width: 0;
+    }
     #theme-yscworks .mag-article-title {
-      grid-column: 2;
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
       font-weight: 700;
-      line-height: 1.3;
-      margin: 0 0 8px;
+      line-height: 1.35;
+      margin: 0 0 10px;
       color: var(--text-primary);
     }
-    #theme-yscworks .mag-article-title a { color: inherit; text-decoration: none; }
+    #theme-yscworks .mag-article-title a { color: inherit; text-decoration: none; transition: color .18s ease; }
     #theme-yscworks .mag-article-title a:hover { color: var(--accent); }
     #theme-yscworks .mag-article-summary {
-      grid-column: 2;
       font-size: 14px;
       line-height: 1.7;
       color: var(--text-secondary);
@@ -1612,12 +1615,14 @@ const Style = () => {
     @media (max-width: 720px) {
       #theme-yscworks .mag-article {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 12px;
+        padding: 20px 0;
       }
       #theme-yscworks .mag-article-meta {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 12px;
+        align-items: baseline;
       }
     }
 
