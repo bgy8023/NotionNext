@@ -2,7 +2,7 @@ import BLOG, { LAYOUT_MAPPINGS } from '@/blog.config'
 // 默认主题改为静态引入：SSG/SSR 阶段同步可解析，彻底避免 dynamic 导入
 // 在构建竞态下挂起(骨架屏被固化进 HTML)或 chunk 加载失败(整页空白)的问题。
 // 其他主题仍走下方 dynamic 导入，保留 ?theme=xxx 运行时切换能力。
-import * as DefaultThemeModule from '@/themes/yscworks'
+import * as DefaultThemeModule from '@/themes/xuhome'
 import getConfig from 'next/config'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
