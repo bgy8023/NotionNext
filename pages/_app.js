@@ -46,16 +46,17 @@ const MyApp = ({ Component, pageProps }) => {
   const queryTheme = getQueryParam(route.asPath, 'theme')
   const notionTheme = pageProps?.NOTION_CONFIG?.THEME
   const configTheme = BLOG.THEME
+  // Prefer blog.config/env over Notion Config so NEXT_PUBLIC_THEME wins
   const theme = useMemo(() => {
-    return queryTheme || notionTheme || configTheme
+    return queryTheme || configTheme || notionTheme
   }, [queryTheme, notionTheme, configTheme])
 
   useEffect(() => {
     const source = queryTheme
       ? 'url:theme'
-      : notionTheme
-        ? 'notion:config'
-        : 'blog/env:config'
+      : configTheme
+        ? 'blog/env:config'
+        : 'notion:config'
     console.log(
       '[ThemeResolver][runtime-final]',
       JSON.stringify(
